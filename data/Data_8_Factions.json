@@ -1,0 +1,4372 @@
+{
+  "factions": [
+    {
+      "id": 1,
+      "nom": "Humains – Citadelles du Nexus",
+      "style": "Chevaliers / Mages + Techno légère (runes, amplificateurs).",
+      "gameplay": "Défense solide, buffs DEF/soutien, polyvalence, formes simples.",
+      "champions": [
+        {
+          "lettre": "A",
+          "nom": "Archonte du Bastion",
+          "role": "Défense / Buffs (Tank Principal).",
+          "stats": {
+            "ATK": 7,
+            "DEF": 12,
+            "HP": 20
+          },
+          "action_speciale": "Rempart Inébranlable (Coût 3 DEF) : jusqu'à la fin du tour adverse, l’Archonte du Bastion peut rediriger vers lui jusqu’à 3 dégâts subis par le QG ou un allié adjacent au QG (après application de leur DEF). De plus, les alliés adjacents au QG gagnent +1 DEF jusqu'à la fin du tour adverse.",
+          "effet_defensif": "Les alliés adjacents au QG gagnent +1 DEF jusqu'à la fin du tour adverse.",
+          "design_visuel": "Grand chevalier en armure lourde (acier poli, runes bleues) avec un bouclier hexagonal et une épée massive, entouré d'une aura de protection dorée.",
+          "effet_def_id": "aura_allies_adj_hq_stat_mod",
+          "effet_def_params": {
+            "stat": "DEF",
+            "amount": 1,
+            "duration": "until_end_enemy_turn"
+          }
+        },
+        {
+          "lettre": "B",
+          "nom": "Archimage Aetheris",
+          "role": "Contrôle / Silence / Anti-Magie.",
+          "stats": {
+            "ATK": 7,
+            "DEF": 10,
+            "HP": 18
+          },
+          "action_speciale": "Décret de Silence (Coût 3 ATK) : choisit une unité ennemie à portée 3. Cette unité ne peut pas utiliser d’action spéciale à son prochain tour. Aetheris conserve en plus son effet passif : au début de chaque tour, la prochaine capacité spéciale de l'ennemi le plus proche du QG voit son coût augmenté de +1 dé.",
+          "effet_defensif": "Au début de chaque tour, la prochaine capacité spéciale de l'ennemi le plus proche du QG a son coût augmenté de +1 dé.",
+          "design_visuel": "Mage féminin en robes claires, gants en lin, tenant un bâton magique qui émet une lumière blanche et froide.",
+          "effet_def_id": "turn_start_nearest_enemy_next_ability_cost_mod",
+          "effet_def_params": {
+            "amount": 1,
+            "target": "nearest_enemy_to_hq",
+            "applies_to": "next_special_ability",
+            "cost_add_type": "+1_die"
+          }
+        },
+        {
+          "lettre": "C",
+          "nom": "Maréchale Soléane",
+          "role": "Attaque coordonnée / Bonus d'armée.",
+          "stats": {
+            "ATK": 9,
+            "DEF": 9,
+            "HP": 17
+          },
+          "action_speciale": "Attaque Ordonnée (Coût 3 MOVE) : choisit jusqu’à 2 unités alliées adjacentes au QG. Chacune peut immédiatement effectuer une attaque de base avec +1 ATK pour cette attaque. Cet effet se cumule avec son passif : quand une unité alliée adjacente au QG attaque, elle gagne +1 ATK supplémentaire pour cette attaque.",
+          "effet_defensif": "Quand une unité alliée adjacente au QG attaque, elle gagne +1 ATK supplémentaire pour cette attaque.",
+          "design_visuel": "Commandante dynamique en armure légère, levant un étendard ou une épée vers l'avant, des soldats du Bastion formant un mur solide derrière elle.",
+          "effet_def_id": "on_ally_adj_hq_attack_stat_mod",
+          "effet_def_params": {
+            "stat": "ATK",
+            "amount": 1,
+            "scope": "this_attack"
+          }
+        },
+        {
+          "lettre": "D",
+          "nom": "Zangdar l'Inquisiteur des Éléments",
+          "role": "Casteur de magie élémentaire ciblé ou zone",
+          "stats": {
+            "ATK": 7,
+            "DEF": 10,
+            "HP": 18
+          },
+          "action_speciale": "Boule de feu (Coût 2 ATK) inflige 6 de dégats peut bruler la cible. Portée 3, Éclairs en chaines (Coût 1 CAP + 3 ATK ) Frappe 1 à 3 cibles adjacentes infligeant 7 de dégats a la premiere cible pour 5 au cible à proximité ",
+          "design_visuel": "Mage masculin en robes sombres, gants de cuir, capuche. faisnt émaner une boule de feu dans sa main droite et des éclairs dans sa main gauche   .",
+          "effet_defensif": "Contre-choc Élémentaire : Quand un ennemi attaque le QG, Zangdar peut lancer une riposte gratuite (Boule de Feu ou Éclair) infligeant 50% des dégâts normaux.",
+          "effet_def_id": "on_hq_attacked_counterattack",
+          "effet_def_params": {
+            "damage_pct": 0.5,
+            "mode": "random_element_spell",
+            "elements": [
+              "fire",
+              "lightning"
+            ],
+            "free": true,
+            "limit": "once_per_enemy_turn"
+          }
+        },
+        {
+          "lettre": "E",
+          "nom": "Tacticienne Selena",
+          "role": "Attaque Coordonnée / Bonus d'Armée",
+          "stats": {
+            "ATK": 9,
+            "DEF": 8,
+            "HP": 17
+          },
+          "action_speciale": "Ordre de Charge (Coût 3 MOVE) : Les alliés adjacents au Champion gagnent +1 ATK pour leur prochaine attaque ce tour.",
+          "effet_defensif": "Coordination de Front : Les attaques d'alliés adjacents au QG contre des ennemis adjacents gagnent +1 ATK et ignorent 1 point de DEF.",
+          "design_visuel": "Chevalier femme, armure plus légère mais plus ornées, grande bannière d'armée au lieu d'un bouclier. Posture de commandement.",
+          "effet_def_id": "on_ally_adj_hq_attack_vs_adj_enemy_mod",
+          "effet_def_params": {
+            "atk_bonus": 1,
+            "ignore_def": 1
+          }
+        }
+      ],
+      "monstres": [
+        {
+          "niveau": 1,
+          "nom": "Recrue du Nexus",
+          "stats": {
+            "ATK": 6,
+            "DEF": 7,
+            "HP": 11
+          },
+          "role": "Tank de base, Blocage",
+          "action_speciale": "Posture Défensive (2 DEF) : Gagne +2 DEF jusqu'à la fin du tour adverse.",
+          "design_visuel": "Jeune recrue en armure de cuir incomplète et cabossée, bouclier rond rayé, casque mal ajusté. Expression crispée et inexpérimentée, équipement de fortune, courte épée serrée à deux mains.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 2
+              }
+            ]
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Milicien du Nexus",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 11
+          },
+          "role": "Bloqueur polyvalent de première ligne.",
+          "action_speciale": "Tenir la Ligne (Coût 2 DEF) : si le Milicien est adjacent au QG, il gagne +1 DEF jusqu’à la fin du tour adverse.",
+          "design_visuel": "Jeune soldat en armure de cuir renforcée, portant un petit bouclier rectangulaire avec l’emblème du Nexus et une lance simple. Il se tient devant le QG, légèrement penché vers l’avant pour indiquer sa posture défensive.",
+          "action_id": "buff_self_if_adjacent_hq",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 1
+              }
+            ],
+            "condition": "adjacent_to_hq"
+          },
+          "action_tags": [
+            "buff",
+            "hq_adjacent"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Soldat du Bastion",
+          "stats": {
+            "ATK": 8,
+            "DEF": 6,
+            "HP": 10
+          },
+          "role": "Unité de ligne simple.",
+          "action_speciale": "Attaque normale (1 ATK), Attaque lourde (3 ATK).",
+          "design_visuel": "Fantassin discipliné portant une lance courte pointée vers l'avant, casque à visière fermée, armure fonctionnelle et robuste. Posture défensive ancrée, grand bouclier rectangulaire devant lui.",
+          "action_id": "attack_modes",
+          "action_params": {
+            "light_cost_atk": 1,
+            "heavy_cost_atk": 3
+          }
+        },
+        {
+          "niveau": 2,
+          "nom": "Caporal du Bastion",
+          "stats": {
+            "ATK": 7,
+            "DEF": 9,
+            "HP": 13
+          },
+          "role": "Mini-tank de ligne protégeant le front et le QG.",
+          "action_speciale": "Posture de Bastion (Coût 2 DEF) : jusqu’à la fin du tour adverse, le Caporal du Bastion gagne +1 DEF. Si le Caporal est adjacent au QG, il gagne +2 DEF à la place.",
+          "design_visuel": "Soldat humain en armure lourde, portant un grand bouclier rectangulaire marqué du symbole du Bastion. Il est représenté planté au milieu d’un couloir, bouclier levé, prêt à encaisser les assauts ennemis.",
+          "action_id": "buff_self_if_adjacent_hq",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 1
+              },
+              {
+                "stat": "DEF",
+                "amount": 2
+              }
+            ],
+            "condition": "adjacent_to_hq"
+          },
+          "action_tags": [
+            "buff",
+            "hq_adjacent"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Archer Runique",
+          "stats": {
+            "ATK": 9,
+            "DEF": 5,
+            "HP": 11
+          },
+          "role": "Harcèlement / Dégâts à distance.",
+          "action_speciale": "Tir Amélioré (2 ATK) : Portée 2. Dégâts modérés.",
+          "design_visuel": "Archer en armure légère dont l'arc est orné de petites runes bleues qui s'illuminent lorsqu'il tire.",
+          "action_id": "ranged_damage",
+          "action_params": {
+            "range": 2,
+            "damage_profile": "moderate"
+          },
+          "action_tags": [
+            "damage",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Guérisseur de Campagne",
+          "stats": {
+            "ATK": 5,
+            "DEF": 5,
+            "HP": 12
+          },
+          "role": "Petit Soin / Support",
+          "action_speciale": "Pansement (2 TRAP) : Soigne un allié adjacent de 3 HP.",
+          "design_visuel": "Soigneur en robe blanche, portant un grand sac de fournitures médicales sur le dos. Il tient un bâton de soutien et rayonne d'une aura verte discrète autour de lui.",
+          "action_id": "heal",
+          "action_params": {}
+        },
+        {
+          "niveau": 2,
+          "nom": "Héraut du Temple",
+          "stats": {
+            "ATK": 6,
+            "DEF": 5,
+            "HP": 12
+          },
+          "role": "Soutien + contrôle.",
+          "action_speciale": "Buff alliés (MOVE + ATK) de zone. Attaque incantation (2 ATK + 1 tour d'incantation) : portée 3 en AOE.",
+          "design_visuel": "Figure en robes de prêtre ou mage, tenant un livre de prières et irradiant une lumière de soutien.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "range": 3,
+            "duration_turns": 1,
+            "note": "Buff alliés (MOVE + ATK) de zone. Attaque incantation (2 ATK + 1 tour d'incantation) : portée 3 en AOE."
+          },
+          "action_tags": [
+            "ranged",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Chevalier du Flanc",
+          "stats": {
+            "ATK": 8,
+            "DEF": 9,
+            "HP": 14
+          },
+          "role": "Provocation / Tank de flanc.",
+          "action_speciale": "Provocation (2 MOVE + 1 DEF) : Force l'ennemi adjacent ciblé à l'attaquer s'il attaque au prochain tour.",
+          "design_visuel": "Chevalier en armure bien taillée, utilisant une position agressive pour détourner l'attention de l'ennemi.",
+          "action_id": "apply_status",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "TAUNT"
+              }
+            ]
+          },
+          "action_tags": [
+            "control"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Gardien du Silence",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 12
+          },
+          "role": "Silence de capacité.",
+          "action_speciale": "Champ d'Inhibition (3 DEF) : L'ennemi adjacent ciblé ne peut pas utiliser de capacité coûtant des dés ATK/DEF au prochain tour.",
+          "design_visuel": "Humanoïde de pierre ou de métal avec la bouche scellée, des symboles de silence flottant autour de lui.",
+          "action_id": "apply_status",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "ABILITY_LOCK"
+              }
+            ]
+          },
+          "action_tags": [
+            "control"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Paladin Aegis",
+          "stats": {
+            "ATK": 8,
+            "DEF": 11,
+            "HP": 15
+          },
+          "role": "Tank élite + support DEF.",
+          "action_speciale": "Aegis Sacrée (2 DEF) : +4 DEF à lui-même ou un allié adjacent.",
+          "design_visuel": "Chevalier en armure immaculée, portant un halo lumineux, en train de prendre une frappe pour un allié.",
+          "action_id": "buff_target_def",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 4
+              }
+            ],
+            "buff_target": "self_or_adjacent_ally"
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Sergent Instructeur",
+          "stats": {
+            "ATK": 7,
+            "DEF": 9,
+            "HP": 14
+          },
+          "role": "Bonus de Mouvement / Initiation au combat",
+          "action_speciale": "Entraînement Coordonné (2 MOVE) : Tous les alliés adjacents gagnent +1 MOVE pour leur prochain déplacement ce tour. Portée 1.",
+          "design_visuel": "Chevalier en armure agile. Sa lance (ou épée) est pointée agressivement vers l'ennemi. Un effet de flash rouge indique l'activation de la provocation.",
+          "action_id": "buff_self",
+          "action_params": {
+            "range": 1,
+            "buffs": [
+              {
+                "stat": "MOVE",
+                "amount": 1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Bélier de Combat",
+          "stats": {
+            "ATK": 10,
+            "DEF": 6,
+            "HP": 11
+          },
+          "role": "Artillerie lourde / Perforation",
+          "action_speciale": "Frappe Blindée (3 ATK) : Inflige 14 dégâts de base. L'attaque perce et traverse une unité ennemie (s'il y en a une deuxième derrière).",
+          "design_visuel": "Petite figurine avec un canon disproportionné sur l'épaule, pointant en l'air (pour symboliser la portée). Un effet de fumée magique bleue l'entoure après un tir.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_values": [
+              14
+            ],
+            "damage": 14
+          },
+          "action_tags": [
+            "damage"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Canonnier Aetherique",
+          "stats": {
+            "ATK": 7,
+            "DEF": 4,
+            "HP": 10
+          },
+          "role": "Artillerie à distance.",
+          "action_speciale": "Bombardement (3 ATK) : Portée 3. Dégâts de zone (AOE 1 case) ou dégâts directs.",
+          "design_visuel": "Tourelle de siège technologique portée par un petit châssis, des runes bleues s'allumant lors du tir.",
+          "action_id": "ranged_damage",
+          "action_params": {
+            "range": 3
+          },
+          "action_tags": [
+            "ranged",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Capitaine de Mêlée",
+          "stats": {
+            "ATK": 10,
+            "DEF": 7,
+            "HP": 13
+          },
+          "role": "Gros dégâts / Bonus aux alliés.",
+          "action_speciale": "Charge Coordonnée (3 ATK + 1 MOVE) : Dégâts lourds. Gagne +1 ATK pour chaque allié adjacent.",
+          "design_visuel": "Soldat d'élite criant des ordres, son design inspirant confiance et menant l'assaut.",
+          "action_id": "buff_self",
+          "action_params": {
+            "damage_profile": "heavy",
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff",
+            "damage"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Prisme Aetherique",
+          "stats": {
+            "ATK": 8,
+            "DEF": 5,
+            "HP": 10
+          },
+          "role": "Débuff ATK / Anti-magie.",
+          "action_speciale": "Drain de Mana (3 TRAP) : -2 ATK à l'ennemi ciblé pour son prochain tour.",
+          "design_visuel": "Structure de cristal flottante qui absorbe l'énergie des unités ennemies proches et la redistribue en lumière protectrice.",
+          "action_id": "apply_debuff",
+          "action_params": {
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -2
+              }
+            ]
+          },
+          "action_tags": [
+            "debuff"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Gaia, l'Épée de Diamant",
+          "stats": {
+            "ATK": 10,
+            "DEF": 9,
+            "HP": 20
+          },
+          "role": "Ultimative, anti-magie.",
+          "action_speciale": "Coup du Diamant (5 ATK) : Dégâts massifs, ignore la DEF magique. Immunisé aux effets de TRAP et de contrôle.",
+          "design_visuel": "Figure humanoïde faite de lumière cristalline, flottant au-dessus du champ de bataille et brandissant une épée massive.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_profile": "massive"
+          },
+          "action_tags": [
+            "damage",
+            "immunity"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Rempart du Nexus",
+          "stats": {
+            "ATK": 8,
+            "DEF": 12,
+            "HP": 22
+          },
+          "role": "Tank ultime / Protection du QG.",
+          "action_speciale": "Transfert Défensif (Coût 3 DEF) : Jusqu'à la fin du tour adverse, le Rempart peut prendre à la place du QG jusqu'à 5 dégâts subis (réductibles par sa DEF). Aura du Bastion (passif) : les alliés adjacents au QG gagnent +1 DEF.",
+          "design_visuel": "Chevalier massif en armure de plaque brillante, couvert de bannières du Nexus. Il se tient directement entre le QG et l'ennemi, son bouclier forme une barrière lumineuse bleutée couvrant plusieurs unités.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "damage_values": [
+              5
+            ],
+            "damage": 5,
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 1
+              }
+            ],
+            "note": "Transfert Défensif (Coût 3 DEF) : Jusqu'à la fin du tour adverse, le Rempart peut prendre à la place du QG jusqu'à 5 dégâts subis (réductibles par sa DEF). Aura du Bastion (passif) : les alliés adjacents au QG gagnent +1 DEF."
+          },
+          "action_tags": [
+            "buff",
+            "damage"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Stratège du Vortex",
+          "stats": {
+            "ATK": 9,
+            "DEF": 9,
+            "HP": 20
+          },
+          "role": "Soutien tactique / Buffs et repositionnement.",
+          "action_speciale": "Ordres de Champ de Bataille (Coût 2 MOVE + 1 TRAP ) : déplace un allié adjacent d'une case et lui donne +1 ATK et +1 DEF jusqu'à la fin du tour adverse. Purge Tactique (Coût 2 DEF) : retire un debuff ou un jeton négatif sur un allié adjacent.",
+          "design_visuel": "Officier humain en armure légère décorée de runes, portant une grande carte holographique du champ de bataille. Il pointe des flèches lumineuses indiquant les repositionnements de ses troupes.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 1
+              },
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ],
+            "note": "Ordres de Champ de Bataille (Coût 2 MOVE + 1 TRAP ) : déplace un allié adjacent d'une case et lui donne +1 ATK et +1 DEF jusqu'à la fin du tour adverse. Purge Tactique (Coût 2 DEF) : retire un debuff ou un jeton négatif sur un allié adjacent."
+          },
+          "action_tags": [
+            "buff",
+            "terrain_like"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nom": "Démons – Conclave Abyssal",
+      "style": "Cornes, flammes violettes, chaînes, portails.",
+      "gameplay": "Gros ATK, beaucoup d’effets qui sacrifient PV ou tuiles pour de la puissance. Risque élevé/Récompense élevée.",
+      "champions": [
+        {
+          "lettre": "A",
+          "nom": "Maître Incarné K'Zul",
+          "role": "ATK / Sacrifice",
+          "stats": {
+            "ATK": 9,
+            "DEF": 8,
+            "HP": 18
+          },
+          "action_speciale": "Pacte du Sang (Coût 3 ATK) : sacrifie 3 HP à K'Zul ou à un allié adjacent au QG pour infliger 5 dégâts directs à une cible à portée 2. Volonté Abyssale : Quand un allié adjacent au QG est détruit, K'Zul gagne +2 ATK jusqu'au début de ton prochain tour (cumulable une fois par tour).",
+          "effet_defensif": "Volonté Abyssale : Quand un allié adjacent au QG est détruit, K'Zul gagne +2 ATK jusqu'au début de ton prochain tour (cumulable une fois par tour).",
+          "design_visuel": "Grand démon cornu, en armure d'obsidienne noire incrustée de flammes violettes, aspirant l'essence d'une unité brisée à ses pieds.",
+          "effet_def_id": "on_ally_adj_hq_attacked_temp_stat_mod",
+          "effet_def_params": {
+            "stat": "DEF",
+            "amount": 1,
+            "duration": "until_start_next_turn",
+            "max_triggers_per_turn": 1,
+            "stackable": true
+          }
+        },
+        {
+          "lettre": "B",
+          "nom": "Seigneur de l'Attrition",
+          "role": "Débuff / Contrôle de Zone",
+          "stats": {
+            "ATK": 7,
+            "DEF": 11,
+            "HP": 19
+          },
+          "action_speciale": "Voile d'Érosion (Coût 3 DEF) : crée une zone d'attrition (croix 3x3 autour du QG) pendant 2 tours. Les ennemis qui commencent leur tour dans cette zone subissent -1 ATK et -1 DEF jusqu'à ton prochain tour. Érosion du Cœur : Au début de chaque tour, le monstre ennemi le plus proche du QG subit 1 dégât direct non-réductible.",
+          "effet_defensif": "Érosion du Cœur : Au début de chaque tour, le monstre ennemi le plus proche du QG subit 1 dégât direct non-réductible.",
+          "design_visuel": "Démon émacié aux os saillants, la peau noircie et craquelée comme du parchemin brûlé. Ses doigts griffus dégagent une poussière corrosive qui ronge l'air autour de lui, et ses yeux brillent d'un éclat verdâtre maladif.",
+          "effet_def_id": "turn_start_nearest_enemy_direct_damage",
+          "effet_def_params": {
+            "damage": 1,
+            "non_reducible": true,
+            "target": "nearest_enemy_to_hq"
+          }
+        },
+        {
+          "lettre": "C",
+          "nom": "Incarnation de la Rage",
+          "role": "Attaque de Zone / Sacrifice étendu",
+          "stats": {
+            "ATK": 10,
+            "DEF": 7,
+            "HP": 17
+          },
+          "action_speciale": "Déflagration de Fureur (Coût 4 ATK) : attaque TOUS les ennemis à portée 2 avec des dégâts égaux au nombre de jetons Fureur du QG (max 3). Rage Accumulée : Chaque fois qu'une unité est détruite dans les 3 cases autour du QG, celui-ci gagne un jeton Fureur (+1 ATK par jeton, perdu après attaque).",
+          "effet_defensif": "Rage Accumulée : Chaque fois qu'une unité est détruite dans les 3 cases autour du QG, celui-ci gagne un jeton Fureur (+1 ATK par jeton, perdu après attaque).",
+          "design_visuel": "Créature démoniaque musclée et bestiale, la peau recouverte de marques incandescentes violettes qui palpitent de rage.",
+          "effet_def_id": "on_ally_damaged_gain_token",
+          "effet_def_params": {
+            "token": "fury",
+            "stat": "ATK",
+            "amount_per_token": 1,
+            "max_tokens": null,
+            "consumed_on": "champion_attack"
+          }
+        },
+        {
+          "lettre": "D",
+          "nom": "K’zhar, l'Écorché Abyssal",
+          "role": "Attaque / Sacrifice de Zone",
+          "stats": {
+            "ATK": 11,
+            "DEF": 8,
+            "HP": 15
+          },
+          "action_speciale": "Abysse Ardent (Coût 4 ATK + 3 HP) : Inflige 15 dégâts à une cible, puis 5 dégâts à toutes les unités adjacentes à la cible (alliés inclus).",
+          "design_visuel": "Démon trapu et très musclé, dont les bras sont disproportionnés. Des marques incandescentes violettes (lignes) parcourent sa peau et clignotent lorsqu'il gagne un jeton Fureur.",
+          "effet_defensif": "Éclaboussure Maudite : Quand le QG est attaqué, l'attaquant subit 2 dégâts directs ET gagne un debuff -1 ATK jusqu'à ton prochain tour.",
+          "effet_def_id": "on_hq_attacked_attacker_damage_and_temp_stat_mod",
+          "effet_def_params": {
+            "damage": 2,
+            "non_reducible": true,
+            "stat": "ATK",
+            "amount": -1,
+            "duration": "until_start_next_turn"
+          }
+        },
+        {
+          "lettre": "E",
+          "nom": "Vrakh l’Enchaîné",
+          "role": "Contrôle / Déplacement Forcé",
+          "stats": {
+            "ATK": 7,
+            "DEF": 9,
+            "HP": 18
+          },
+          "action_speciale": "Chaîne de l'Enfer (Coût 3 MOVE) : Cible un ennemi à 2 cases de distance et le tire sur une case adjacente à l'unité.",
+          "design_visuel": "Démon longiligne avec un grand sceptre de fer sombre. Il est enveloppé de chaînes qui traînent au sol et d'une brume noire autour de ses pieds (pour le débuff de zone).",
+          "effet_defensif": "Filet d'Ombre : Les ennemis adjacents au QG ont -1 MOVE et ne peuvent pas utiliser d'action spéciale à leur premier tour après être entrés en zone adjacente.",
+          "effet_def_id": "aura_enemies_adj_hq_disable_special_on_first_turn_in_zone",
+          "effet_def_params": {
+            "disabled": "special_ability",
+            "duration_turns": 1,
+            "trigger": "enter_adjacent_zone"
+          }
+        }
+      ],
+      "monstres": [
+        {
+          "niveau": 1,
+          "nom": "Démon Mineur",
+          "stats": {
+            "ATK": 9,
+            "DEF": 4,
+            "HP": 9
+          },
+          "role": "Poussière sacrificielle / Glass Cannon Lv1.",
+          "action_speciale": "Charge Flamboyante (2 ATK) : Dégâts augmentés (+3 ATK), mais le Démon subit 1 dégât direct non-réductible après l'attaque.",
+          "design_visuel": "Petit démon chétif et nerveux, avec de petites cornes et une fourche rouillée.",
+          "action_id": "true_damage",
+          "action_params": {
+            "damage_values": [
+              1
+            ],
+            "damage": 1,
+            "damage_profile": "boosted",
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 3
+              }
+            ],
+            "true_damage": true
+          },
+          "action_tags": [
+            "buff",
+            "damage",
+            "true_damage"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Larve de l’Abîme",
+          "stats": {
+            "ATK": 8,
+            "DEF": 5,
+            "HP": 7
+          },
+          "role": "Chair à canon agressive de première ligne.",
+          "action_speciale": "Explosion Viscérale (passif) : lorsque la Larve de l’Abîme est détruite par une attaque au contact, l’attaquant subit 1 dégât direct après la résolution de l’attaque.",
+          "design_visuel": "Masse chitineuse vaguement humanoïde, parcourue de veines incandescentes. Sa peau se fissure et laisse suinter une lueur écarlate, suggérant qu’elle peut exploser à tout moment en éclaboussures brûlantes.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "damage_values": [
+              1
+            ],
+            "damage": 1,
+            "note": "Explosion Viscérale (passif) : lorsque la Larve de l’Abîme est détruite par une attaque au contact, l’attaquant subit 1 dégât direct après la résolution de l’attaque."
+          },
+          "action_tags": [
+            "damage"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Harpie des Abysses",
+          "stats": {
+            "ATK": 8,
+            "DEF": 4,
+            "HP": 9
+          },
+          "role": "Séduction / Débuff ATK",
+          "action_speciale": "Baiser Fatal (2 ATK) : Inflige 6 dégâts. La cible perd 2 ATK jusqu'à la fin de son prochain tour.",
+          "design_visuel": "Créature ailée démoniaque, cornes courtes, ailes membraneuses, silhouette gracile mais bestiale, tenue sombre complète, veines/runes violettes visibles sous des fissures, main griffue qui projette un sceau rougeoyant (simple cercle).",
+          "action_id": "debuff_atk",
+          "action_params": {
+            "debuff": {
+              "stat": "ATK",
+              "amount": -2,
+              "duration": "1_tour"
+            }
+          }
+        },
+        {
+          "niveau": 2,
+          "nom": "Gardien des Flammes",
+          "stats": {
+            "ATK": 8,
+            "DEF": 7,
+            "HP": 13
+          },
+          "role": "Pivot défensif / Anti-mobilité.",
+          "action_speciale": "Chaînes Arcaniques (2 TRAP) : Pose un jeton 'Chaînes' qui donne -1 MOVE à l'ennemi qui entre sur la case.",
+          "design_visuel": "Démon plus massif, tenant un grand bouclier de bronze et une torche de flammes violettes, avec des chaînes déployées au sol.",
+          "action_id": "place_terrain_token",
+          "action_params": {
+            "debuffs": [
+              {
+                "stat": "MOVE",
+                "amount": -1
+              }
+            ],
+            "note": "Chaînes Arcaniques (2 TRAP) : Pose un jeton 'Chaînes' qui donne -1 MOVE à l'ennemi qui entre sur la case."
+          },
+          "action_tags": [
+            "debuff",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Gardien du Portail",
+          "stats": {
+            "ATK": 6,
+            "DEF": 7,
+            "HP": 13
+          },
+          "role": "Bloqueur, DEF au QG",
+          "action_speciale": "Ancrage (2 DEF) : Ne peut pas être déplacé ou repoussé pour ce tour.",
+          "design_visuel": "Petite gargouille de pierre noire, très compacte. Elle a des ailes repliées et son corps est l'élément le plus large (pour symboliser le blocage).",
+          "action_id": "apply_status",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "ANCHOR"
+              }
+            ]
+          },
+          "action_tags": [
+            "control"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Ravageur Écorché",
+          "stats": {
+            "ATK": 12,
+            "DEF": 3,
+            "HP": 10
+          },
+          "role": "Bruiser de première ligne / Fragile mais violent.",
+          "action_speciale": "Coup de Fureur (3 ATK) : Dégâts augmentés (+4 ATK).",
+          "design_visuel": "Démon de mêlée aux griffes et crocs proéminents, dont la force brute contraste avec une peau fine.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_profile": "boosted",
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 4
+              }
+            ]
+          },
+          "action_tags": [
+            "buff",
+            "damage"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Dévoreur d'Âmes",
+          "stats": {
+            "ATK": 10,
+            "DEF": 5,
+            "HP": 10
+          },
+          "role": "Bruiser à haut risque / Finisseur.",
+          "action_speciale": "Assaut Dévoreur (2 ATK) : Dégâts augmentés (+3 ATK), mais le Dévoreur subit 2 dégâts directs non-réductibles.",
+          "design_visuel": "Démon élite ressemblant à un chien de chasse, rapide et mortel, portant des blessures de retour de flamme visibles sur son corps.",
+          "action_id": "true_damage",
+          "action_params": {
+            "damage_values": [
+              2
+            ],
+            "damage": 2,
+            "damage_profile": "boosted",
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 3
+              }
+            ],
+            "true_damage": true
+          },
+          "action_tags": [
+            "buff",
+            "damage",
+            "true_damage"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Héraut Démoniaque de Guerre",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 14
+          },
+          "role": "Bonus de mouvement de zone.",
+          "action_speciale": "Tambours de Fureur (2 MOVE) : Tous les alliés adjacents au Héraut gagnent +1 MOVE pour leur prochain tour.",
+          "design_visuel": "Démon portant des tambours de guerre, les frappant pour augmenter la vitesse et la fureur de ses alliés.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "MOVE",
+                "amount": 1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "L'Enchaîneur Malphas",
+          "stats": {
+            "ATK": 7,
+            "DEF": 8,
+            "HP": 13
+          },
+          "role": "Contrôle de cible / Faiblesse",
+          "action_speciale": "Marque de l'Esclave (3 MOVE) : L'unité ennemie ciblée ne peut pas utiliser ses actions spéciales lors de son prochain tour. Portée 1.",
+          "design_visuel": "Démon mince tenant un crochet de fer chaud. Son action spéciale est signalée par un effet de lignes noires qui tombent sur l'unité ciblée (l'érosion).",
+          "action_id": "apply_status",
+          "action_params": {
+            "range": 1,
+            "apply_status": [
+              {
+                "status": "ROOT"
+              }
+            ]
+          },
+          "action_tags": [
+            "control",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Tortionnaire Éthéré",
+          "stats": {
+            "ATK": 9,
+            "DEF": 6,
+            "HP": 11
+          },
+          "role": "Débuff DEF temporaire.",
+          "action_speciale": "Affaiblissement (2 ATK + 1 TRAP) : Cible un ennemi. L'ennemi a -3 DEF pour sa prochaine attaque subie.",
+          "design_visuel": "Démon longiligne tenant des instruments de torture, érodant l'armure de l'ennemi par une lumière sombre.",
+          "action_id": "apply_debuff",
+          "action_params": {
+            "debuffs": [
+              {
+                "stat": "DEF",
+                "amount": -3
+              }
+            ]
+          },
+          "action_tags": [
+            "debuff"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Tourmenteur Cendré",
+          "stats": {
+            "ATK": 8,
+            "DEF": 7,
+            "HP": 12
+          },
+          "role": "Débuff DEF / Contrôle de foule",
+          "action_speciale": "Sceptre d'Angoisse (3 DEF) : Les ennemis adjacents subissent -3 DEF jusqu'au début de ton prochain tour. Peut être utilisé avant une attaque.",
+          "design_visuel": "Démon spectral émacié, visage masqué de cendres, bras disproportionnés terminés par des doigts effilés qui s'étirent comme des vrilles. Une poussière grise tourbillonnante émane de son corps, rongeant l'armure des ennemis proches.",
+          "action_id": "apply_debuff",
+          "action_params": {
+            "debuffs": [
+              {
+                "stat": "DEF",
+                "amount": -3
+              }
+            ]
+          },
+          "action_tags": [
+            "debuff"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Traqueur de l'Abysse",
+          "stats": {
+            "ATK": 9,
+            "DEF": 5,
+            "HP": 10
+          },
+          "role": "Mobilité / Exécution",
+          "action_speciale": "Charge Ténébreuse (2 MOVE + 1 ATK) : Peut traverser les unités. Inflige +3 dégâts si la cible a moins de 50% de ses HP max.",
+          "design_visuel": "Démon quadrupède (rapide) avec une allure de chien de chasse. Les flammes violettes s'échappent des fissures (blessures) de son armure après son attaque.",
+          "action_id": "apply_status",
+          "action_params": {
+            "chance": 0.5,
+            "damage_values": [
+              3
+            ],
+            "damage": 3,
+            "apply_status": [
+              {
+                "status": "PHASE"
+              }
+            ]
+          },
+          "action_tags": [
+            "chance",
+            "control",
+            "damage"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Cataclysme Mineur",
+          "stats": {
+            "ATK": 11,
+            "DEF": 6,
+            "HP": 12
+          },
+          "role": "Attaque AOE conique.",
+          "action_speciale": "Souffle du Chaos (4 ATK) : Attaque AOE en cône de 2 cases infligeant des dégâts de zone.",
+          "design_visuel": "Grand démon crachant une large vague de flammes violettes en cône devant lui.",
+          "action_id": "direct_damage",
+          "action_params": {},
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Incarnation de l'Éther",
+          "stats": {
+            "ATK": 9,
+            "DEF": 7,
+            "HP": 14
+          },
+          "role": "Mage de combat / Brûlure progressive",
+          "action_speciale": "Souffle Éthéré (2 ATK) : Cible un ennemi à 2 cases de distance. L'ennemi subit 2 dégâts directs, puis 1 dégât supplémentaire au début de son prochain tour (Brûlure Éthérée).",
+          "design_visuel": "Démon compact en armure de magma noir et rougeoyant, portant un grimoire enchaîné de flammes violettes. Petites cornes acérées, regard intense, silhouette ramassée mais menaçante, lave qui coule entre les plaques.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_values": [
+              2,
+              1
+            ],
+            "damage": 2
+          },
+          "action_tags": [
+            "damage",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Noyau d'Ombre",
+          "stats": {
+            "ATK": 8,
+            "DEF": 8,
+            "HP": 13
+          },
+          "role": "Attaque à dégâts directs.",
+          "action_speciale": "Impulsion Nécrosante (3 ATK + 1 TRAP) : Dégâts directs non-réductibles par DEF, portée 2.",
+          "design_visuel": "Cœur de cristal noir, entouré de vrilles d'énergie sombre, tirant une impulsion qui traverse l'armure.",
+          "action_id": "true_damage",
+          "action_params": {
+            "range": 2,
+            "true_damage": true
+          },
+          "action_tags": [
+            "ranged",
+            "true_damage"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Portail Abyssal",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 12
+          },
+          "role": "Soutien / Zoning / Repositionnement.",
+          "action_speciale": "Invocation Éphémère (5 ATK) : Pose un jeton 'Portail' permettant un déplacement instantané (coûte 1 MOVE à l'allié). Le jeton disparaît après 2 tours.",
+          "design_visuel": "Immense fissure dans la réalité, entourée d'os et de flammes violettes, d'où émergent des membres démoniaques.",
+          "action_id": "place_terrain_token",
+          "action_params": {
+            "duration_turns": 2,
+            "note": "Invocation Éphémère (5 ATK) : Pose un jeton 'Portail' permettant un déplacement instantané (coûte 1 MOVE à l'allié). Le jeton disparaît après 2 tours."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Bête de l'Abîme",
+          "stats": {
+            "ATK": 13,
+            "DEF": 6,
+            "HP": 19
+          },
+          "role": "Ignore la DEF / Pure ATK.",
+          "action_speciale": "Assaut Primordial (5 ATK) : Dégâts massifs, ignore 4 points de la DEF adverse.",
+          "design_visuel": "Créature démoniaque colossale et bestiale à cornes, dont le corps laisse paraître une gueule de crocs sur l'abdomen et les épaules.",
+          "action_id": "direct_damage_ignore_def",
+          "action_params": {
+            "damage_profile": "massive",
+            "ignore_def": 4
+          },
+          "action_tags": [
+            "armor_pen",
+            "damage"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Juge des Flammes",
+          "stats": {
+            "ATK": 10,
+            "DEF": 6,
+            "HP": 13
+          },
+          "role": "Attaque frontale / Sacrifice mineur",
+          "action_speciale": "Fureur Jugée (2 ATK + 1 HP) : Inflige 12 dégâts de base à une cible en ligne droite. L'unité subit 1 dégât direct (le sacrifice).",
+          "design_visuel": "Démon couronné de fer noir, torse nu bardé de plaques de lave solidifiée. Son bras droit est un brasier vivant, la main en forme de marteau incandescent jugeant les coupables d'un coup fatal.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_values": [
+              12,
+              1
+            ],
+            "damage": 12
+          },
+          "action_tags": [
+            "damage"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Léviathan de l'Ombre",
+          "stats": {
+            "ATK": 13,
+            "DEF": 9,
+            "HP": 18
+          },
+          "role": "Menace Ultimative / Ignorance de DEF",
+          "action_speciale": "Vague d'Obsidienne (5 ATK) : Inflige 18 dégâts de base. Cette attaque ignore 5 points de DEF de la cible. Nécessite 1 tour d'incantation.",
+          "design_visuel": "Monstre énorme, trapu et bosselé, fait de muscles et de crocs. Il est en position de charge et est légèrement plus grand que les autres sprites SD.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "duration_turns": 1,
+            "damage_values": [
+              18
+            ],
+            "damage": 18
+          },
+          "action_tags": [
+            "damage"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nom": "Reptiliens – Légions Scailles-Feu",
+      "style": "Lézards artilleurs, dragons mineurs, catapultes organiques, écailles-feu.",
+      "gameplay": "TRAP / bombardement (artillerie), contrôle de zones à distance.",
+      "champions": [
+        {
+          "lettre": "A",
+          "nom": "Seigneur Pyroscale",
+          "role": "Artillerie / TRAP.",
+          "stats": {
+            "ATK": 8,
+            "DEF": 10,
+            "HP": 20
+          },
+          "action_speciale": "Barrage de Soufre (Coût 4 ATK) : attaque une case à portée 3 qui devient une zone de napalm (3 tours). Les unités ennemies qui terminent leur tour sur cette case subient 2 dégâts directs. Une fois par tour adverse, effectue 1 riposte gratuite contre un ennemi qui attaque le QG ou un allié adjacent.",
+          "effet_defensif": "Une fois par tour adverse, effectue 1 riposte gratuite contre un ennemi qui attaque le QG ou un allié adjacent.",
+          "design_visuel": "Grand lézard bipède en armure lourde d'écaille rouge et noire, perché en hauteur et donnant des ordres de bombardement.",
+          "effet_def_id": "once_per_enemy_turn_counterattack_on_hq_or_adj_ally_attacked",
+          "effet_def_params": {
+            "damage_pct": 1.0,
+            "free": true,
+            "triggers": [
+              "hq_attacked",
+              "ally_adj_hq_attacked"
+            ]
+          }
+        },
+        {
+          "lettre": "B",
+          "nom": "Reine Ophidienne Nythra",
+          "role": "Poisons / Débuff.",
+          "stats": {
+            "ATK": 9,
+            "DEF": 8,
+            "HP": 17
+          },
+          "action_speciale": "Essaim Venimeux (Coût 3 ATK) : applique 2 jetons Poison à une cible à portée 2 (2 dégâts directs par jeton à la fin de son tour) ET étend l’effet Contact Toxique à tous les ennemis à portée 1 pour ce tour. Contact Toxique : Chaque ennemi qui attaque le champion, le QG ou un allié adjacent subit un jeton Poison (1 dégât direct à la fin de son tour).",
+          "effet_defensif": "Contact Toxique : Chaque ennemi qui attaque le champion, le QG ou un allié adjacent subit un jeton Poison (1 dégât direct à la fin de son tour).",
+          "design_visuel": "Figure serpentine vêtue de parures d'or égyptiennes, tenant un flacon de poison et entourée d'une brume toxique.",
+          "effet_def_id": "on_attack_target_hq_or_champ_or_adj_ally_apply_poison",
+          "effet_def_params": {
+            "poison_damage_end_turn": 1,
+            "poison_stacks": 1,
+            "stackable": true,
+            "triggers": [
+              "attack_hq",
+              "attack_champion",
+              "attack_ally_adj_hq"
+            ]
+          }
+        },
+        {
+          "lettre": "C",
+          "nom": "Général Scailles",
+          "role": "Tank / Contrôle de zone.",
+          "stats": {
+            "ATK": 8,
+            "DEF": 11,
+            "HP": 22
+          },
+          "action_speciale": "Regard Pétrifiant (Coût 3 DEF) : un ennemi adjacent au QG ne peut ni bouger ni attaquer à son prochain tour. Stase d'Écaille : Les ennemis adjacents au QG ont -1 MOVE (minimum 0) et subissent 1 dégât direct s'ils tentent de bouger.",
+          "effet_defensif": "Stase d'Écaille : Les ennemis adjacents au QG ont -1 MOVE (minimum 0).",
+          "design_visuel": "Grand reptilien bipède à la crête dorsale développée et colorée, tenant un sceptre de commandement orné de griffes. Posture de chef d'armée, regard dominant vers le bas, armure d'écailles forgées et gravées.",
+          "effet_def_id": "aura_enemies_adj_hq_stat_mod",
+          "effet_def_params": {
+            "stat": "MOVE",
+            "amount": -1,
+            "min": 0
+          }
+        },
+        {
+          "lettre": "D",
+          "nom": "Grande Sorcière Venina",
+          "role": "Poison / Affliction",
+          "stats": {
+            "ATK": 8,
+            "DEF": 9,
+            "HP": 17
+          },
+          "action_speciale": "Pluie de Pestilence (Coût 3 ATK) : attaque TOUS les ennemis à portée 2 avec 6 dégâts + 1 Poison (dégât direct prochain tour). Quand une unité ennemie attaque le QG, son ATK diminue de 1 pendant 1 tour.",
+          "design_visuel": "Grande Reine-Serpent humanoïde. Sa queue est longue et elle porte des bijoux d'or et d'émeraude. Son attaque laisse une trace de venin vert toxique.",
+          "effet_defensif": "Voile Toxique : Les ennemis qui attaquent le QG subissent 1 Poison permanent (cumulable) qui inflige 1 dégât direct à chaque fin de leur tour.",
+          "effet_def_id": "on_hq_attacked_apply_poison_permanent",
+          "effet_def_params": {
+            "poison_damage_end_turn": 1,
+            "stackable": true
+          }
+        },
+        {
+          "lettre": "E",
+          "nom": "Roi-Basilic Thar’Zul",
+          "role": "Contrôle / Tank offensif",
+          "stats": {
+            "ATK": 10,
+            "DEF": 8,
+            "HP": 16
+          },
+          "action_speciale": "Frappe Royale (Coût 4 ATK) : Inflige 12 dégâts de base. L'ennemi ne peut pas bouger ou utiliser son action normale lors de son prochain tour.",
+          "design_visuel": "Lézard humanoïde massif, en armure d'écailles sombres. Il a un casque de Basilic (crête et yeux rouges). Il est en posture menaçante et statique.",
+          "effet_defensif": "Auras Calcifiantes : Les ennemis adjacents au QG ont -1 ATK et -1 MOVE. Une fois par tour adverse, un ennemi adjacent ne peut pas attaquer.",
+          "effet_def_id": "aura_enemies_adj_hq_multi_effect",
+          "effet_def_params": {
+            "stat_mods": {
+              "ATK": -1,
+              "MOVE": -1
+            },
+            "once_per_enemy_turn_disable_attack": true
+          }
+        }
+      ],
+      "monstres": [
+        {
+          "niveau": 1,
+          "nom": "Chasseur Lance-Javelot",
+          "stats": {
+            "ATK": 8,
+            "DEF": 5,
+            "HP": 9
+          },
+          "role": "Portée / Ligne simple",
+          "action_speciale": "Javelot Enflammé (2 ATK) : Inflige 9 dégâts à Portée 2.",
+          "design_visuel": "Raptor bipède en armure légère de cuir et d'os, en posture de lancer. Il tient un javelot enflammé d'une flamme orange vif, corps élancé et agile.",
+          "action_id": "ranged_damage",
+          "action_params": {
+            "range": 2,
+            "damage_values": [
+              9
+            ],
+            "damage": 9
+          },
+          "action_tags": [
+            "damage",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Raptor Éclaireur",
+          "stats": {
+            "ATK": 8,
+            "DEF": 5,
+            "HP": 10
+          },
+          "role": "Mobile / Scout (2 cases MOVE).",
+          "action_speciale": "Attaque normale (1 ATK).",
+          "design_visuel": "Lézard rapide et svelte sur ses deux pattes arrière, doté de griffes acérées.",
+          "action_id": "basic_attack_only",
+          "action_params": {}
+        },
+        {
+          "niveau": 1,
+          "nom": "Éclaireur Scaille-Rouge",
+          "stats": {
+            "ATK": 7,
+            "DEF": 5,
+            "HP": 9
+          },
+          "role": "Éclaireur mobile de base.",
+          "action_speciale": "Sprint des Dunes (Coût 1 MOVE) : l’Éclaireur peut se déplacer d’1 case supplémentaire ce tour.",
+          "design_visuel": "Petit reptilien bipède, léger, avec des écailles rouges sur le dos et un équipement minimal. Il est représenté en pleine course, la queue tendue pour garder l’équilibre.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Sprint des Dunes (Coût 1 MOVE) : l’Éclaireur peut se déplacer d’1 case supplémentaire ce tour."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Drakeling Enragé",
+          "stats": {
+            "ATK": 11,
+            "DEF": 5,
+            "HP": 12
+          },
+          "role": "Bruiser de mêlée / Dégâts bruts.",
+          "action_speciale": "Attaque normale (1 ATK). Attaque lourde (3 ATK).",
+          "design_visuel": "Dragon mineur juvénile furieux, la peau fissurée par la chaleur interne.",
+          "action_id": "attack_modes",
+          "action_params": {
+            "light_cost_atk": 1,
+            "heavy_cost_atk": 3
+          }
+        },
+        {
+          "niveau": 2,
+          "nom": "Gardien Cuirassé",
+          "stats": {
+            "ATK": 7,
+            "DEF": 9,
+            "HP": 14
+          },
+          "role": "Tank / Pivot.",
+          "action_speciale": "Attaque normale (1 ATK). Défense Améliorée (2 DEF) : +3 DEF.",
+          "design_visuel": "Lézard trapu aux écailles renforcées par une carapace, se tenant solidement sur une intersection.",
+          "action_id": "basic_plus_buff",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 3
+              }
+            ],
+            "duration": "this_turn"
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Lancier Écaille-Feu",
+          "stats": {
+            "ATK": 8,
+            "DEF": 7,
+            "HP": 12
+          },
+          "role": "Anti-charge de ligne.",
+          "action_speciale": "Lance d’Interception (passif) : si un ennemi se déplace sur une case adjacente à ce monstre ce tour, le Lancier gagne +2 ATK pour sa prochaine attaque contre cet ennemi avant la fin du tour.",
+          "design_visuel": "Guerrier reptilien en armure d’écailles orangées, tenant une longue lance incandescente plantée dans le sol. Des braises rougeoyantes s’échappent de la pointe lorsqu’il se prépare à intercepter.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 2
+              }
+            ],
+            "note": "Lance d’Interception (passif) : si un ennemi se déplace sur une case adjacente à ce monstre ce tour, le Lancier gagne +2 ATK pour sa prochaine attaque contre cet ennemi avant la fin du tour."
+          },
+          "action_tags": [
+            "buff",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Nécromancien des Fumerolles",
+          "stats": {
+            "ATK": 6,
+            "DEF": 6,
+            "HP": 11
+          },
+          "role": "TRAP / Dégâts progressifs",
+          "action_speciale": "Gaz Toxique (2 TRAP) : Pose un jeton 'Gaz' sur une case adjacente. Les unités sur cette case subissent 2 dégâts à la fin du tour.",
+          "design_visuel": "Lézard mage portant un grand masque à gaz primitif, enveloppé d'un manteau sombre. Une fumée verte et toxique s'échappe de son dos et de ses mains, posture voûtée de sorcier.",
+          "action_id": "place_terrain_token",
+          "action_params": {
+            "damage_values": [
+              2
+            ],
+            "damage": 2,
+            "note": "Gaz Toxique (2 TRAP) : Pose un jeton 'Gaz' sur une case adjacente. Les unités sur cette case subissent 2 dégâts à la fin du tour."
+          },
+          "action_tags": [
+            "damage",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Garde du Basilic",
+          "stats": {
+            "ATK": 7,
+            "DEF": 10,
+            "HP": 15
+          },
+          "role": "Bloqueur de chemin / Pivot.",
+          "action_speciale": "Verrouillage Écailleux (2 DEF + 1 MOVE) : Ne peut pas être déplacé ou repoussé jusqu'à la fin du tour adverse.",
+          "design_visuel": "Reptilien colossal aux écailles pierre-grise soudées les unes aux autres comme une armure naturelle. Bras écartés, cou rentrant dans les épaules, posture de mur vivant impossible à contourner.",
+          "action_id": "apply_status",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "ANCHOR"
+              }
+            ]
+          },
+          "action_tags": [
+            "control"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Ophidian Fumant",
+          "stats": {
+            "ATK": 8,
+            "DEF": 6,
+            "HP": 11
+          },
+          "role": "Contrôle de zone au TRAP.",
+          "action_speciale": "Brume Incandescente (3 TRAP) : Pose une zone brûlante (3 dégâts directs) qui reste 2 tours sur la case ciblée.",
+          "design_visuel": "Lézard crachant une brume incandescente au sol, créant une zone dangereuse.",
+          "action_id": "place_terrain_token",
+          "action_params": {
+            "duration_turns": 2,
+            "damage_values": [
+              3
+            ],
+            "damage": 3,
+            "note": "Brume Incandescente (3 TRAP) : Pose une zone brûlante (3 dégâts directs) qui reste 2 tours sur la case ciblée.",
+            "suggested_conversion": "dot_on_target",
+            "dot_damage": 3,
+            "dot_turns": 2
+          },
+          "action_tags": [
+            "damage",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Cracheur de Fumées Caustiques",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 13
+          },
+          "role": "Contrôle de zone toxique.",
+          "action_speciale": "Brume Caustique (Coût 3 TRAP) : crée une zone de brume toxique sur une case à portée 2. La zone persiste 2 tours, réduit de 1 le MOVE ou l’ATK des ennemis qui y commencent leur tour (au choix du joueur) et leur inflige 1 dégât direct à la fin de leur tour.",
+          "design_visuel": "Reptilien au long cou, portant un masque ou des glandes visibles sur la gorge. Il expulse un nuage vert jaunâtre qui s’étale au ras du sol sur plusieurs cases autour de lui.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "range": 2,
+            "duration_turns": 2,
+            "damage_values": [
+              1
+            ],
+            "damage": 1,
+            "note": "Brume Caustique (Coût 3 TRAP) : crée une zone de brume toxique sur une case à portée 2. La zone persiste 2 tours, réduit de 1 le MOVE ou l’ATK des ennemis qui y commencent leur tour (au choix du joueur) et leur inflige 1 dégât direct à la fin de leur tour."
+          },
+          "action_tags": [
+            "damage",
+            "ranged",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Vipère Débilitante",
+          "stats": {
+            "ATK": 9,
+            "DEF": 5,
+            "HP": 10
+          },
+          "role": "Poison de mêlée / Débuff ATK.",
+          "action_speciale": "Morsure Toxique (2 ATK) : Applique un jeton Poison et un malus de -1 ATK pour le prochain tour ennemi.",
+          "design_visuel": "Reptile rapide avec des crocs venimeux laissant une traînée de poison verdâtre.",
+          "action_id": "apply_status",
+          "action_params": {
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -1
+              }
+            ],
+            "apply_status": [
+              {
+                "status": "POISON"
+              }
+            ]
+          },
+          "action_tags": [
+            "control",
+            "debuff",
+            "poison",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Lézard Artilleur",
+          "stats": {
+            "ATK": 7,
+            "DEF": 4,
+            "HP": 10
+          },
+          "role": "Artillerie lourde à longue portée.",
+          "action_speciale": "Bombardement Lourd (4 ATK) : Portée 3, dégâts massifs. Ne peut pas bouger ou attaquer normalement ce tour-là.",
+          "design_visuel": "Lézard dont le dos sert de plateforme à un mortier organique.",
+          "action_id": "ranged_damage",
+          "action_params": {
+            "range": 3,
+            "damage_profile": "massive"
+          },
+          "action_tags": [
+            "damage",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Pylône Toxique",
+          "stats": {
+            "ATK": 6,
+            "DEF": 8,
+            "HP": 13
+          },
+          "role": "AOE Poison / Contrôle.",
+          "action_speciale": "Dispersion Toxique (4 TRAP) : Tous les ennemis à portée 2 subissent un jeton Poison.",
+          "design_visuel": "Structure statique faite d'os et de veines reptiliennes pompant un gaz vert nauséabond.",
+          "action_id": "apply_status",
+          "action_params": {
+            "range": 2,
+            "apply_status": [
+              {
+                "status": "POISON"
+              }
+            ]
+          },
+          "action_tags": [
+            "control",
+            "poison",
+            "ranged",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Sentinelle de l'Écaille",
+          "stats": {
+            "ATK": 8,
+            "DEF": 9,
+            "HP": 16
+          },
+          "role": "Sceau de zone / Tank.",
+          "action_speciale": "Sceau du Basilic (3 DEF) : Place un jeton 'Sceau' sur une tuile adjacente qui ne peut plus être traversée par l'ennemi.",
+          "design_visuel": "Reptilien trapu aux bras écartés en croix barrant le passage, sans arme, uniquement son corps massif comme muraille. Museau baissé, yeux mi-clos, plaques d'armure naturelles soudées les unes aux autres.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Sceau du Basilic (3 DEF) : Place un jeton 'Sceau' sur une tuile adjacente qui ne peut plus être traversée par l'ennemi."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Guerrier Raptor Alpha",
+          "stats": {
+            "ATK": 10,
+            "DEF": 7,
+            "HP": 14
+          },
+          "role": "Bruiser mobile de meute.",
+          "action_speciale": "Charge de Meute (Coût 3 MOVE + 2 ATK) : se déplace en ligne droite jusqu’à 2 cases et attaque une cible sur la case finale. Si la cible est adjacente à au moins une autre unité Reptilienne alliée, cette attaque gagne +3 dégâts.",
+          "design_visuel": "Raptor bipède imposant, équipé d’une armure d’écailles métalliques et de lames fixées à ses griffes. Il est représenté en pleine course, entouré de silhouettes de raptors plus petits.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_values": [
+              3
+            ],
+            "damage": 3
+          },
+          "action_tags": [
+            "damage",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Gardien Basilic d’Élite",
+          "stats": {
+            "ATK": 9,
+            "DEF": 9,
+            "HP": 15
+          },
+          "role": "Contrôle ponctuel par pétrification.",
+          "action_speciale": "Regard Calcifiant (Coût 3 ATK) : attaque une cible adjacente et inflige des dégâts moyens. Si la cible survit, elle ne peut pas utiliser l’action MOVE à son prochain tour (pétrification partielle).",
+          "design_visuel": "Créature reptilienne massive aux yeux brillants, recouverte d’épaisses plaques d’armure pierreuses. Un halo verdâtre entoure sa tête lorsque son regard se fixe sur un ennemi.",
+          "action_id": "apply_status",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "ROOT"
+              }
+            ]
+          },
+          "action_tags": [
+            "control"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Avatar Venimeux des Fumerolles",
+          "stats": {
+            "ATK": 9,
+            "DEF": 9,
+            "HP": 22
+          },
+          "role": "Poison ultime / Contrôle de zone.",
+          "action_speciale": "Venin Cumulatif (Coût 3 ATK) : inflige des dégâts modérés et applique un jeton Poison (+1 dégât direct à la fin du tour de la cible, cumulable jusqu'à 3). Miasme Paralysant (Coût 3 TRAP) : tous les ennemis empoisonnés à portée 2 subissent -1 MOVE et -1 ATK jusqu'à ton prochain tour. Détonation Toxique (Coût 4 ATK) : retire tous les jetons Poison sur une cible et lui inflige 2 dégâts directs par jeton retiré.",
+          "design_visuel": "Grande créature serpentine couverte d'écailles vertes et noires, avec plusieurs crocs dégoulinants de venin. Un nuage de brume verdâtre l'entoure et se répand sur les tuiles proches.",
+          "action_id": "apply_status",
+          "action_params": {
+            "range": 2,
+            "damage_values": [
+              1,
+              2
+            ],
+            "damage": 1,
+            "damage_profile": "moderate",
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -1
+              },
+              {
+                "stat": "MOVE",
+                "amount": -1
+              }
+            ],
+            "apply_status": [
+              {
+                "status": "POISON"
+              }
+            ]
+          },
+          "action_tags": [
+            "control",
+            "damage",
+            "debuff",
+            "poison",
+            "ranged",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Hydre Régénératrice",
+          "stats": {
+            "ATK": 9,
+            "DEF": 8,
+            "HP": 25
+          },
+          "role": "Tank ultime / Régénération / Dégâts de zone.",
+          "action_speciale": "Régénération (3 DEF) : Regagne 5 HP. (Ne peut être utilisé que si HP < 50% max). Dégâts de zone (1 ATK) : attaque tous les ennemis adjacents.",
+          "design_visuel": "Grande hydre rampante avec trois têtes. Chaque tête a un motif écailleux différent. Elle crache de la fumée de guérison.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "chance": 0.5
+          },
+          "action_tags": [
+            "chance",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Imugi, le Dragon Sulfuré",
+          "stats": {
+            "ATK": 12,
+            "DEF": 7,
+            "HP": 18
+          },
+          "role": "Dragon oriental / Frappe puissante.",
+          "action_speciale": "Souffle Céleste (5 ATK) : Attaque à distance avec dégâts directs supplémentaires.",
+          "design_visuel": "Dragon oriental long et sinueux, aux longues moustaches et écailles vert toxique, yeux jaunes et veines de lave.",
+          "action_id": "direct_damage",
+          "action_params": {}
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nom": "Cyborgs – Système Oméga",
+      "style": "Exosquelettes, implants, câbles, lumières froides.",
+      "gameplay": "Manipulation du plateau (déformations, téléporteurs, recyclage de tuiles).",
+      "champions": [
+        {
+          "lettre": "A",
+          "nom": "Programme Alpha",
+          "role": "Contrôle du plateau / Mouvement.",
+          "stats": {
+            "ATK": 7,
+            "DEF": 11,
+            "HP": 22
+          },
+          "action_speciale": "Reconfiguration Tactique (Coût 3 MOVE) : téléporte instantanément un allié adjacent au QG vers n'importe quelle case libre à portée 3. Optimisation du Flux : Une fois par tour adverse, peut faire effectuer une action 1 MOVE gratuite à un allié adjacent au QG.",
+          "effet_defensif": "Optimisation du Flux : Une fois par tour adverse, peut faire faire une action 1 MOVE gratuite à un allié adjacent au QG.",
+          "design_visuel": "Androïde aux lignes nettes et froides, levant une main tandis que des chemins holographiques se reconfigurent.",
+          "effet_def_id": "once_per_enemy_turn_grant_free_move_to_ally_adj_hq",
+          "effet_def_params": {
+            "move_points": 1
+          }
+        },
+        {
+          "lettre": "B",
+          "nom": "Analyste du Code",
+          "role": "Silence / Anti-magie / Débuff.",
+          "stats": {
+            "ATK": 7,
+            "DEF": 10,
+            "HP": 18
+          },
+          "action_speciale": "Protocole d'Invalidation (Coût 3 ATK) : cible un ennemi à portée 2 qui ne peut utiliser AUCUNE action spéciale (attaque de base seulement) à son prochain tour. Analyse Stérile : Au début de chaque tour, la prochaine capacité spéciale de l'ennemi à portée de garde a son coût augmenté de +1 dé.",
+          "effet_defensif": "Analyse Stérile : Au début de chaque tour, la prochaine capacité spéciale de l'ennemi à portée de garde a son coût augmenté de +1 dé.",
+          "design_visuel": "Humanoïde aux multiples bras mécaniques fins manipulant une console holographique.",
+          "effet_def_id": "turn_start_next_enemy_in_guard_range_ability_cost_mod",
+          "effet_def_params": {
+            "amount": 1,
+            "target": "enemy_in_guard_range",
+            "applies_to": "next_special_ability",
+            "cost_add_type": "+1_die"
+          }
+        },
+        {
+          "lettre": "C",
+          "nom": "Architecte du Réseau",
+          "role": "Téléportation / Déplacement forcé.",
+          "stats": {
+            "ATK": 8,
+            "DEF": 9,
+            "HP": 19
+          },
+          "action_speciale": "Portails Vectoriels (Coût 3 DEF) : échange la position de deux unités alliées adjacentes au QG OU téléporte un allié adjacent au QG vers une case libre à portée 2. Grille de Déplacement : Une fois par tour adverse, peut déplacer une unité ennemie adjacente au QG d'une case au hasard.",
+          "effet_defensif": "Grille de Déplacement : Une fois par tour adverse, peut déplacer une unité ennemie adjacente au QG d'une case au hasard.",
+          "design_visuel": "Cyborg massif flottant légèrement, avec des portails de téléportation ouverts à ses côtés.",
+          "effet_def_id": "once_per_enemy_turn_move_enemy_adj_hq_randomly",
+          "effet_def_params": {
+            "move_steps": 1,
+            "random": true
+          }
+        },
+        {
+          "lettre": "D",
+          "nom": "Cybros-0",
+          "role": "Construction / Fortification",
+          "stats": {
+            "ATK": 6,
+            "DEF": 11,
+            "HP": 19
+          },
+          "action_speciale": "Déploiement (Coût 3 MOVE) : Pose un jeton 'Fortification' sur une case adjacente. Les unités derrière la Fortification gagnent +2 DEF.",
+          "design_visuel": "Cyborg massif, bras équipés de foreuses/outils de construction lourds. Sa posture est statique, comme un pilier.",
+          "effet_defensif": "Renforts Automatiques : Au début de ton tour, une Fortification temporaire (+1 DEF au QG) est automatiquement placée adjacent au QG si aucune n'existe déjà.",
+          "effet_def_id": "turn_start_spawn_or_refresh_temp_hq_fortification",
+          "effet_def_params": {
+            "hq_def_bonus": 1,
+            "placement": "adjacent_if_none",
+            "duration": "until_next_turn_start"
+          }
+        },
+        {
+          "lettre": "E",
+          "nom": "Maître d'Armes X-9",
+          "role": "Mobilité / Assaut répété",
+          "stats": {
+            "ATK": 11,
+            "DEF": 7,
+            "HP": 15
+          },
+          "action_speciale": "Frappe Éclair (Coût 4 ATK) : Inflige 10 dégâts. Peut réutiliser cette action immédiatement si l'attaque détruit l'unité ennemie.",
+          "design_visuel": "Cyborg en armure agile. Ses bras et jambes sont des lames rétractables. Il est constamment en mouvement.",
+          "effet_defensif": "Contre-Attaque Automatisée : Une fois par tour adverse, quand le QG est attaqué, X-9 effectue une riposte gratuite infligeant 4 dégâts à l'attaquant.",
+          "effet_def_id": "once_per_enemy_turn_on_hq_attacked_deal_damage_to_attacker",
+          "effet_def_params": {
+            "damage": 4,
+            "free": true
+          }
+        }
+      ],
+      "monstres": [
+        {
+          "niveau": 1,
+          "nom": "Agent de Recyclage",
+          "stats": {
+            "ATK": 7,
+            "DEF": 5,
+            "HP": 8
+          },
+          "role": "Utility Lv1 / Repositionnement.",
+          "action_speciale": "Recyclage (1 DEF) : Retire une tuile 'Nexus' adjacente du jeu et vous gagnez 1 dé DEF dans le pool.",
+          "design_visuel": "Petit robot sur chenilles avec pinces et bras articulés ramassant des débris.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Recyclage (1 DEF) : Retire une tuile 'Nexus' adjacente du jeu et vous gagnez 1 dé DEF dans le pool."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Reconnaissance Aérienne",
+          "stats": {
+            "ATK": 7,
+            "DEF": 5,
+            "HP": 9
+          },
+          "role": "Mobilité / Vision",
+          "action_speciale": "Séquence Rapide (2 MOVE) : Peut traverser les unités.",
+          "design_visuel": "Petit drone volant en forme de sphère aplatie, avec des ailes stabilisatrices bleues rétractables. Design compact et aérodynamique, laisse une fine traînée cyan dans son sillage.",
+          "action_id": "apply_status",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "PHASE"
+              }
+            ]
+          },
+          "action_tags": [
+            "control"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Micro-Sentinelle de Défense",
+          "stats": {
+            "ATK": 6,
+            "DEF": 8,
+            "HP": 9
+          },
+          "role": "Petit garde autour du QG ou des structures.",
+          "action_speciale": "Lien Défensif (passif) : tant que cette unité est adjacente au QG ou à une structure Cyborg alliée, cette structure gagne +1 DEF. La Micro-Sentinelle possède une simple attaque de base sans effet supplémentaire.",
+          "design_visuel": "Petit pylône mécanique sur pattes, avec un œil lumineux au sommet et des plaques métalliques déployées comme un mini-bouclier. Des câbles d’énergie bleue la relient au bâtiment qu’elle protège.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 1
+              }
+            ],
+            "note": "Lien Défensif (passif) : tant que cette unité est adjacente au QG ou à une structure Cyborg alliée, cette structure gagne +1 DEF. La Micro-Sentinelle possède une simple attaque de base sans effet supplémentaire."
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Module de Réparation",
+          "stats": {
+            "ATK": 5,
+            "DEF": 7,
+            "HP": 11
+          },
+          "role": "Soin léger et maintenance de terrain.",
+          "action_speciale": "Routine de Maintenance (Coût 2 DEF) : soigne un allié adjacent de 2 HP. Réparation de Surface (Coût 1 MOVE) : retire un TRAP ou un effet de terrain négatif sur une case adjacente.",
+          "design_visuel": "Petit drone au corps cubique, équipé de bras mécaniques déployables et de lumières vertes de diagnostic. Il projette un rayon de réparation sur les alliés et sur le sol abîmé.",
+          "action_id": "heal",
+          "action_params": {},
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Exosquelette d'Assaut",
+          "stats": {
+            "ATK": 10,
+            "DEF": 6,
+            "HP": 11
+          },
+          "role": "Bruiser de mêlée / Dégâts bruts.",
+          "action_speciale": "Téléportation Courte (2 MOVE) : Se téléporte sur n'importe quelle case adjacente en ignorant les obstacles.",
+          "design_visuel": "Unité de mêlée massive en exosquelette de combat visible, plaques d'acier gris soudées sur un chassis hydraulique. Poings fermés, posture d'impact, voyants rouges actifs sur les articulations.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Téléportation Courte (2 MOVE) : Se téléporte sur n'importe quelle case adjacente en ignorant les obstacles."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Ingénieur de Champ",
+          "stats": {
+            "ATK": 6,
+            "DEF": 8,
+            "HP": 12
+          },
+          "role": "Mur temporaire / Buff DEF technique.",
+          "action_speciale": "Barrière de Force (2 DEF) : Pose un jeton 'Champ de Force' sur une case adjacente. Les alliés sur cette case gagnent +2 DEF.",
+          "design_visuel": "Cyborg dont les mains génèrent des champs de force géométriques temporaires.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 2
+              }
+            ]
+          },
+          "action_tags": [
+            "buff",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Pylône de Soutien",
+          "stats": {
+            "ATK": 5,
+            "DEF": 8,
+            "HP": 12
+          },
+          "role": "DEF de zone / Immobile",
+          "action_speciale": "Relais DEF (2 DEF) : Les alliés adjacents gagnent +1 DEF jusqu'à la fin du tour adverse.",
+          "design_visuel": "Tour cylindrique fixe montée sur un socle à griffes métalliques, sommet ouvrant sur un émetteur à impulsions. Pulse une lumière néon bleue en continu vers les unités adjacentes.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Drone Sentinelle",
+          "stats": {
+            "ATK": 8,
+            "DEF": 4,
+            "HP": 9
+          },
+          "role": "Reconfiguration / Isolation.",
+          "action_speciale": "Reconfiguration (2 MOVE) : La case adjacente ciblée devient une 'Tuile Isolée' (portée max 1 pour les ennemis) jusqu'à ton prochain tour.",
+          "design_visuel": "Drone volant projetant des grilles holographiques pour délimiter les zones.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Reconfiguration (2 MOVE) : La case adjacente ciblée devient une 'Tuile Isolée' (portée max 1 pour les ennemis) jusqu'à ton prochain tour."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Interface Zéro",
+          "stats": {
+            "ATK": 7,
+            "DEF": 6,
+            "HP": 10
+          },
+          "role": "Silence / Contrôle.",
+          "action_speciale": "Décharge Stérile (2 TRAP) : Silence une unité adjacente, incapable d'utiliser des actions spéciales pour son prochain tour.",
+          "design_visuel": "Cyborg au corps minimaliste flottant, émettant des ondes sonores de neutralisation.",
+          "action_id": "apply_status",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "SILENCE"
+              }
+            ]
+          },
+          "action_tags": [
+            "control"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Séquenceur de Flux",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 11
+          },
+          "role": "Téléportation alliée.",
+          "action_speciale": "Transfert de Flux (2 MOVE + 1 TRAP) : Téléporte un allié adjacent sur une autre case adjacente à lui-même.",
+          "design_visuel": "Petit robot volant en forme de losange, deux ailes latérales translucides battant à grande vitesse. Laisse une traînée de lumière cyan structurée en segments de données dans son sillage.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Transfert de Flux (2 MOVE + 1 TRAP) : Téléporte un allié adjacent sur une autre case adjacente à lui-même."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Grille de Stase",
+          "stats": {
+            "ATK": 7,
+            "DEF": 9,
+            "HP": 14
+          },
+          "role": "Contrôle de zone / Déplacement forcé.",
+          "action_speciale": "Barrière Impulsive (3 DEF) : Crée une grille énergétique. Les ennemis qui traversent cette case sont repoussés d'une case.",
+          "design_visuel": "Grande structure quadripode plantée au sol, générant une grille énergétique verte entre quatre pylones. Des arcs électriques courent le long des barreaux de lumière retenant les unités prises.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Barrière Impulsive (3 DEF) : Crée une grille énergétique. Les ennemis qui traversent cette case sont repoussés d'une case."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Perturbateur A.I.",
+          "stats": {
+            "ATK": 8,
+            "DEF": 5,
+            "HP": 12
+          },
+          "role": "Augmentation du coût.",
+          "action_speciale": "Surcharge de Système (3 ATK + 1 TRAP) : Augmente le coût de la prochaine attaque de l'ennemi ciblé de +2 dés ATK.",
+          "design_visuel": "Grand pylône mobile projetant des symboles binaires rouges sur un ennemi.",
+          "action_id": "increase_enemy_cost",
+          "action_params": {
+            "cost_increase": {
+              "symbol": "ATK",
+              "amount": 2
+            }
+          },
+          "action_tags": [
+            "cost_mod"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Tisseur de Câbles",
+          "stats": {
+            "ATK": 6,
+            "DEF": 8,
+            "HP": 13
+          },
+          "role": "Contrôle de mouvement / Piège TRAP.",
+          "action_speciale": "Piège Stase (3 TRAP) : Cible un ennemi à portée 2 qui ne peut pas utiliser l'action MOVE pour son prochain tour.",
+          "design_visuel": "Assemblage de câbles et de métal, laissant des fils électriques traîner au sol.",
+          "action_id": "apply_status",
+          "action_params": {
+            "range": 2,
+            "apply_status": [
+              {
+                "status": "ROOT"
+              }
+            ]
+          },
+          "action_tags": [
+            "control",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Sentinelle à Rayon Gamma",
+          "stats": {
+            "ATK": 11,
+            "DEF": 7,
+            "HP": 14
+          },
+          "role": "Tir direct puissant à distance.",
+          "action_speciale": "Rayon Gamma (Coût 4 ATK) : attaque à portée 3 en ligne droite, infligeant de lourds dégâts dont une partie est directe (non-réductible par la DEF). Surcharge de Canon : si la Sentinelle utilise Rayon Gamma deux tours de suite, elle subit 2 dégâts directs après la deuxième utilisation.",
+          "design_visuel": "Tour cyborg élancée montée sur un socle articulé, avec un long canon énergétique émettant une lueur violette. Lors du tir, un rayon concentré traverse le plateau en ligne droite.",
+          "action_id": "true_damage",
+          "action_params": {
+            "range": 3,
+            "damage_values": [
+              2
+            ],
+            "damage": 2,
+            "true_damage": true
+          },
+          "action_tags": [
+            "damage",
+            "ranged",
+            "true_damage"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Lanceur d’Impulsions EMP",
+          "stats": {
+            "ATK": 9,
+            "DEF": 8,
+            "HP": 15
+          },
+          "role": "Dégâts et anti-capacités.",
+          "action_speciale": "Explosion EMP (Coût 3 ATK) : attaque une cible à portée 2, inflige des dégâts moyens. La cible ne peut pas utiliser d’action spéciale lors de son prochain tour.",
+          "design_visuel": "Cyborg lourd équipé d’un canon d’épaule circulaire. Lorsqu’il tire, une onde d’énergie bleu-blanc se propage en anneau autour de l’impact, avec des arcs électriques perturbant les circuits ennemis.",
+          "action_id": "ranged_damage",
+          "action_params": {
+            "range": 2
+          },
+          "action_tags": [
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Exosquelette Sentient",
+          "stats": {
+            "ATK": 10,
+            "DEF": 10,
+            "HP": 20
+          },
+          "role": "Équilibré / Immunisé aux terrains.",
+          "action_speciale": "Frappe de Précision (4 ATK) : Ignore les effets de terrain (TRAP, Sceau, Brume, etc.) et ne peut être déplacé par la force.",
+          "design_visuel": "Humanoïde mécanique aux proportions parfaites, revêtement chrome miroir. Mouvements fluides trahissant une IA avancée, iris lumineux bleu intense, aucune vis apparente, design épuré et menaçant.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Frappe de Précision (4 ATK) : Ignore les effets de terrain (TRAP, Sceau, Brume, etc.) et ne peut être déplacé par la force."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Drone d’Assaut Oméga",
+          "stats": {
+            "ATK": 11,
+            "DEF": 7,
+            "HP": 17
+          },
+          "role": "Assassin ultra mobile.",
+          "action_speciale": "Saut Vectoriel (Coût 2 MOVE) : se déplace de jusqu’à 3 cases en ignorant les unités et les TRAP, mais doit finir sur une case libre. Frappe Chirurgicale (Coût 3 ATK) : inflige 7 dégâts et ignore 2 points de DEF de la cible. Protocole d'Exécution : si la Frappe Chirurgicale détruit la cible, le Drone peut utiliser à nouveau Saut Vectoriel ce tour.",
+          "design_visuel": "Unité volante compacte, avec un noyau lumineux bleu et des membres articulés en lames. Des lignes de données holographiques s'affichent en vol, missiles rétractables sous les ailes.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_values": [
+              7
+            ],
+            "damage": 7
+          },
+          "action_tags": [
+            "damage",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Forteresse Mobile X‑0",
+          "stats": {
+            "ATK": 8,
+            "DEF": 12,
+            "HP": 24
+          },
+          "role": "Tank techno / Protection de zone.",
+          "action_speciale": "Mur de Données (Coût 3 DEF) : les alliés adjacents gagnent +2 DEF jusqu’à la fin du tour adverse. Mode Bastion (passif) : si X‑0 n’a pas bougé ce tour, il gagne +1 DEF supplémentaire et renvoie 1 dégât direct à la première unité qui l’attaque.",
+          "design_visuel": "Massif quadrupède blindé, recouvert de plaques métalliques épaisses et de projecteurs d’énergie bleue. Des champs de force polygonaux se forment entre ses pattes, abritant les alliés à proximité.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "damage_values": [
+              1
+            ],
+            "damage": 1,
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 2
+              },
+              {
+                "stat": "DEF",
+                "amount": 1
+              }
+            ],
+            "note": "Mur de Données (Coût 3 DEF) : les alliés adjacents gagnent +2 DEF jusqu’à la fin du tour adverse. Mode Bastion (passif) : si X‑0 n’a pas bougé ce tour, il gagne +1 DEF supplémentaire et renvoie 1 dégât direct à la première unité qui l’attaque."
+          },
+          "action_tags": [
+            "buff",
+            "damage"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nom": "Orcs – Clans Fer & Fureur",
+      "style": "Brut, tôles soudées, armes improvisées, totems tech.",
+      "gameplay": "Formes de dés agressives, beaucoup de HP, attaques lourdes plus faciles. Robustesse.",
+      "champions": [
+        {
+          "lettre": "A",
+          "nom": "Chef de Guerre Grok",
+          "role": "Bruiser / HP.",
+          "stats": {
+            "ATK": 10,
+            "DEF": 7,
+            "HP": 24
+          },
+          "action_speciale": "Rage des Blessés : tant qu’au moins un allié Orc à portée 2 est en dessous de 50% de ses HP, le Chef gagne +2 ATK.",
+          "effet_defensif": "Rugissement de Guerre : Au début de ton tour, Grok gagne +1 ATK pour chaque monstre Orc allié à portée 2 du QG (max +3 ATK).",
+          "design_visuel": "Orc gigantesque avec des plaques de métal soudées, brandissant une masse improvisée et hurlant.",
+          "effet_def_id": "turn_start_gain_stat_per_ally_in_radius",
+          "effet_def_params": {
+            "stat": "ATK",
+            "amount_per_unit": 1,
+            "radius": 2,
+            "max_bonus": 3,
+            "ally_filter": "orc"
+          }
+        },
+        {
+          "lettre": "B",
+          "nom": "Gorhak, le Porte-Esprits des Totems",
+          "role": "Chaman des Totems Support / Buff de stats.",
+          "stats": {
+            "ATK": 8,
+            "DEF": 9,
+            "HP": 19
+          },
+          "action_speciale": "Invocation Totémique (Coût 3 DEF) : place un totem adjacent au QG (2 tours). Tous les Orcs alliés à portée 1 du totem gagnent +1 ATK et +1 DEF. Bénédiction Totémique : Au début de votre tour, un allié adjacent au QG gagne +1 DEF et +1 ATK jusqu'à la fin du tour adverse.",
+          "effet_defensif": "Bénédiction Totémique : Au début de votre tour, un allié adjacent au QG gagne +1 DEF et +1 ATK jusqu'à la fin du tour adverse.",
+          "design_visuel": "Orc plus petit portant des masques tribaux et tenant un totem tech brut.",
+          "effet_def_id": "turn_start_buff_one_ally_adj_hq",
+          "effet_def_params": {
+            "stat_mods": {
+              "DEF": 1,
+              "ATK": 1
+            },
+            "duration": "until_end_enemy_turn",
+            "target": "one_ally_adj_hq"
+          }
+        },
+        {
+          "lettre": "C",
+          "nom": "Capitaine de la Mêlée",
+          "role": "Attaque coordonnée / Bonus d'armée.",
+          "stats": {
+            "ATK": 10,
+            "DEF": 8,
+            "HP": 21
+          },
+          "action_speciale": "Cri de Mêlée (Coût 3 ATK) : jusqu'à 3 unités alliées adjacentes au QG peuvent attaquer immédiatement une fois chacune avec +1 ATK. Charge de Clan : Quand une unité alliée adjacente au QG attaque, elle gagne +1 ATK supplémentaire pour cette attaque.",
+          "effet_defensif": "Charge de Clan : Quand une unité alliée adjacente au QG attaque, elle gagne +1 ATK supplémentaire pour cette attaque.",
+          "design_visuel": "Orc au torse nu bardé de tatouages tribaux, brandissant une grande hache de guerre au-dessus de sa tête en hurlant un ordre. Large cicatrice sur le visage, posture de charge frontale explosive.",
+          "effet_def_id": "on_ally_adj_hq_attack_stat_mod",
+          "effet_def_params": {
+            "stat": "ATK",
+            "amount": 1,
+            "scope": "this_attack"
+          }
+        },
+        {
+          "lettre": "D",
+          "nom": "Drakzul, Forgeron des Totems",
+          "role": "Chaman des Totems Soutien de Zone / Buff ATK",
+          "stats": {
+            "ATK": 8,
+            "DEF": 9,
+            "HP": 17
+          },
+          "action_speciale": "Totem de Fureur (Coût 3 DEF) : Pose un jeton 'Totem' sur une case adjacente. Les alliés adjacents au Totem gagnent +2 ATK (jusqu'à la fin de ton prochain tour).",
+          "design_visuel": "Orc avec des lunettes de soudeur. Il manie un totem de fer tordu orné de crânes et de circuits.",
+          "effet_defensif": "Aura Totémique : Au début de ton tour, TOUS les Orcs adjacents au QG gagnent +1 ATK jusqu'à la fin du tour adverse.",
+          "effet_def_id": "turn_start_buff_all_orcs_adj_hq",
+          "effet_def_params": {
+            "stat": "ATK",
+            "amount": 1,
+            "duration": "until_end_enemy_turn"
+          }
+        },
+        {
+          "lettre": "E",
+          "nom": "Guerre-Forge",
+          "role": "Dégâts de Zone / Brutalité",
+          "stats": {
+            "ATK": 10,
+            "DEF": 10,
+            "HP": 18
+          },
+          "action_speciale": "Impact Mécano (Coût 4 ATK) : Inflige 14 dégâts de base. Ignore 3 points de DEF de la cible.",
+          "design_visuel": "Une machine de guerre quadrupède pilotée par un Orc. Elle est faite de plaques d'acier rouillé et possède un canon lourd.",
+          "effet_defensif": "Contre-Feu Brutal : Quand le QG subit une attaque, Guerre-Forge riposte automatiquement infligeant 3 dégâts à l'attaquant (ignore 1 DEF).",
+          "effet_def_id": "on_hq_attacked_counter_damage_ignore_def",
+          "effet_def_params": {
+            "damage": 3,
+            "ignore_def": 1,
+            "free": true
+          }
+        }
+      ],
+      "monstres": [
+        {
+          "niveau": 1,
+          "nom": "Bidasse Peaux-Vertes",
+          "stats": {
+            "ATK": 8,
+            "DEF": 6,
+            "HP": 11
+          },
+          "role": "Mêlée pure, Charge",
+          "action_speciale": "Tête de Fer (2 ATK) : Gagne +1 ATK si l'unité a bougé ce tour.",
+          "design_visuel": "Orc trapu en armure de fer rudimentaire, avec un grand casque en cloche de métal rouillé. Posture de charge tête baissée, peau verte scarifiée, armé d'une hache grossière.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Jeune Guerrier",
+          "stats": {
+            "ATK": 8,
+            "DEF": 6,
+            "HP": 12
+          },
+          "role": "Unité de ligne simple / HP solides.",
+          "action_speciale": "Attaque de Base (2 ATK) : Attaque lourde moins chère que la norme.",
+          "design_visuel": "Jeune orc sans armure élaborée, torse presque nu avec des bandes de cuir. Petite massue à pointes dans la main droite, expression entre la peur et la bravoure, peau verte unie sans cicatrices.",
+          "action_id": "attack_variant",
+          "action_params": {}
+        },
+        {
+          "niveau": 1,
+          "nom": "Casseur de Cailloux",
+          "stats": {
+            "ATK": 8,
+            "DEF": 6,
+            "HP": 13
+          },
+          "role": "Ligne de front brute.",
+          "action_speciale": "Amour de la Tôle (passif) : gagne +1 ATK contre une cible dont la DEF de base est supérieure à la sienne.",
+          "design_visuel": "Orc trapu portant un énorme marteau de pierre et de métal. Son armure est faite de plaques grossièrement rivetées, couvertes de bosses prouvant son goût pour frapper tout ce qui est solide.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ],
+            "note": "Amour de la Tôle (passif) : gagne +1 ATK contre une cible dont la DEF de base est supérieure à la sienne."
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Bâtisseur de Bunkers",
+          "stats": {
+            "ATK": 7,
+            "DEF": 9,
+            "HP": 15
+          },
+          "role": "Tank / Création de couverture.",
+          "action_speciale": "Couverture Improvisée (2 DEF) : Pose un jeton 'Barricade'. Les alliés qui y passent gagnent +1 DEF.",
+          "design_visuel": "Orc trapu portant un casque de mineur, érigeant une barricade de ferraille.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Hache de Fer",
+          "stats": {
+            "ATK": 11,
+            "DEF": 5,
+            "HP": 13
+          },
+          "role": "Bruiser de mêlée / Gros dégâts.",
+          "action_speciale": "Frappe Furieuse (3 ATK) : Dégâts lourds. Si l'ennemi est détruit, vous récupérez 1 dé ATK.",
+          "design_visuel": "Orc fantassin en avance prudente, hache à une main levée, portant un bouclier de bois cerclé de fer rouillé. Armure de plaques grossières, posture basse et méfiante.",
+          "action_id": "heal",
+          "action_params": {
+            "damage_profile": "heavy"
+          },
+          "action_tags": [
+            "damage"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Totem de Guerre Mobile",
+          "stats": {
+            "ATK": 6,
+            "DEF": 7,
+            "HP": 14
+          },
+          "role": "Support HP, Tank de ligne",
+          "action_speciale": "Soin Brutal (2 DEF) : Soigne un allié adjacent de 3 HP, l'unité subit 1 dégât.",
+          "design_visuel": "Orc portant sur son dos un grand totem de fer tordu orné de crânes. Le totem irradie une aura de rouille verdâtre, l'Orc avance avec peine sous le poids, expression déterminée.",
+          "action_id": "heal",
+          "action_params": {
+            "damage_values": [
+              1
+            ],
+            "damage": 1
+          },
+          "action_tags": [
+            "damage"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Guerrier Cuirassé",
+          "stats": {
+            "ATK": 8,
+            "DEF": 10,
+            "HP": 16
+          },
+          "role": "Tank lourd / Mur inébranlable.",
+          "action_speciale": "Posture Inébranlable (3 DEF) : Ne peut pas être déplacé, repoussé ni ciblé par des effets de contrôle.",
+          "design_visuel": "Orc recouvert d'épaisses plaques de métal très difficile à bouger.",
+          "action_id": "apply_status",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "ANCHOR"
+              }
+            ]
+          },
+          "action_tags": [
+            "control"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Ligne de Front",
+          "stats": {
+            "ATK": 9,
+            "DEF": 9,
+            "HP": 15
+          },
+          "role": "Provocation / Verrouillage.",
+          "action_speciale": "Défiance (2 DEF) : L'ennemi ciblé doit attaquer la Ligne de Front s'il attaque au prochain tour, et elle gagne +2 DEF.",
+          "design_visuel": "Orc tenant deux boucliers soudés, obligeant l'ennemi à l'attaquer.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 2
+              }
+            ]
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Porte-Bannière",
+          "stats": {
+            "ATK": 8,
+            "DEF": 8,
+            "HP": 14
+          },
+          "role": "Buff de stats de zone.",
+          "action_speciale": "Ralliement (2 MOVE) : Les alliés à portée 1 gagnent +1 ATK et +1 DEF jusqu'à la fin du tour.",
+          "design_visuel": "Orc fier portant un grand étendard de guerre en lambeaux planté sur un mât de fer, poing levé. Posture droite et combative, armure tribale sommaire, le drapeau claque dans le vent.",
+          "action_id": "buff_self",
+          "action_params": {
+            "range": 1,
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 1
+              },
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Fendeur de Bouclier",
+          "stats": {
+            "ATK": 10,
+            "DEF": 6,
+            "HP": 14
+          },
+          "role": "Anti-tank spécialisé.",
+          "action_speciale": "Coup Brise-Armure (Coût 3 ATK) : attaque lourde qui ignore 2 points de DEF de la cible. Si la cible possède un bonus DEF temporaire, ce bonus est retiré après l’attaque.",
+          "design_visuel": "Guerrier orc maniant une lourde hache dentelée, avec des fragments de boucliers brisés accrochés à sa ceinture. Chaque coup laisse un impact visible sur l’armure ennemie.",
+          "action_id": "armor_break",
+          "action_params": {
+            "ignore_def": 2,
+            "remove_temp_def_buff": true
+          }
+        },
+        {
+          "niveau": 3,
+          "nom": "Hurleur de Bataille",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 15
+          },
+          "role": "Buff de groupe offensif.",
+          "action_speciale": "Cri de Guerre (Coût 2 MOVE) : les Orcs alliés à portée 2 gagnent +1 ATK pour leur prochaine attaque ce tour. Rage Sanglante (optionnelle) : le Hurleur peut subir 2 dégâts directs supplémentaires pour augmenter ce bonus à +2 ATK.",
+          "design_visuel": "Orc debout sur un rocher, tenant un tambour ou une corne de guerre. Sa bouche est grande ouverte dans un hurlement, des ondes sonores stylisées se propageant vers les alliés.",
+          "action_id": "buff_self",
+          "action_params": {
+            "range": 2,
+            "damage_values": [
+              2
+            ],
+            "damage": 2,
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 1
+              },
+              {
+                "stat": "ATK",
+                "amount": 2
+              }
+            ]
+          },
+          "action_tags": [
+            "buff",
+            "damage",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Porte-Furie Totémique",
+          "stats": {
+            "ATK": 8,
+            "DEF": 9,
+            "HP": 16
+          },
+          "role": "Super buff situationnel de meute.",
+          "action_speciale": "Totem de Fureur (passif) : tant qu’au moins 2 autres Orcs sont adjacents à cette unité, ces Orcs gagnent +1 ATK. Sacrifice de Clan (Coût 3 DEF) : sacrifier 1 HP par Orc adjacent; ces Orcs gagnent +2 ATK supplémentaires pour ce tour.",
+          "design_visuel": "Orc massif portant sur son dos un énorme totem métallique couvert de crânes et de pièces soudées. De la fumée verdâtre s’échappe du totem lorsque la furie du clan est activée.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 1
+              },
+              {
+                "stat": "ATK",
+                "amount": 2
+              }
+            ],
+            "note": "Totem de Fureur (passif) : tant qu’au moins 2 autres Orcs sont adjacents à cette unité, ces Orcs gagnent +1 ATK. Sacrifice de Clan (Coût 3 DEF) : sacrifier 1 HP par Orc adjacent; ces Orcs gagnent +2 ATK supplémentaires pour ce tour."
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Baliste Improvisée",
+          "stats": {
+            "ATK": 9,
+            "DEF": 5,
+            "HP": 11
+          },
+          "role": "Artillerie facile / Démoralisation.",
+          "action_speciale": "Tir Décoiffant (2 ATK + 1 MOVE) : Dégâts modérés. Le coût de la prochaine attaque lourde de l'ennemi ciblé augmente de +1 dé ATK.",
+          "design_visuel": "Machine de siège orc assemblée de bric et de broc.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_profile": "moderate"
+          },
+          "action_tags": [
+            "damage"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Démolisseur de Murs",
+          "stats": {
+            "ATK": 12,
+            "DEF": 6,
+            "HP": 13
+          },
+          "role": "Dégâts aux structures / HP.",
+          "action_speciale": "Frappe du Bélier (4 ATK) : Dégâts massifs, +50 % de dégâts aux QG et aux structures.",
+          "design_visuel": "Orc massif brandissant un bélier improvisé fait d'une poutre de métal tordu, bras tendus en avant en posture de charge frontale. Muscles saillants, pieds ancrés dans le sol, regard fixé sur l'obstacle.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "chance": 0.5,
+            "damage_profile": "massive"
+          },
+          "action_tags": [
+            "chance",
+            "damage"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Guérisseur de Guerre",
+          "stats": {
+            "ATK": 7,
+            "DEF": 10,
+            "HP": 17
+          },
+          "role": "Tank / Soin.",
+          "action_speciale": "Soin Primitif (2 TRAP) : Soigne 4 HP à lui-même ou à un allié adjacent.",
+          "design_visuel": "Orc massif portant des masques de soins primitifs et utilisant une machine à vapeur pour soigner.",
+          "action_id": "heal",
+          "action_params": {}
+        },
+        {
+          "niveau": 5,
+          "nom": "Golem de Ferraille",
+          "stats": {
+            "ATK": 11,
+            "DEF": 12,
+            "HP": 24
+          },
+          "role": "Tank ultime / Mur inébranlable.",
+          "action_speciale": "Peau de Ferraille : Immunisé aux dégâts directs (TRAP, Poison). Attaque du Poing (3 ATK).",
+          "design_visuel": "Créature gigantesque faite d'un assemblage de tôles, de roues et de câbles.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "POISON"
+              }
+            ],
+            "immune_direct_damage": true,
+            "note": "Peau de Ferraille : Immunisé aux dégâts directs (TRAP, Poison). Attaque du Poing (3 ATK)."
+          },
+          "action_tags": [
+            "control",
+            "immunity",
+            "poison"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Totem‑Canon Ancestral",
+          "stats": {
+            "ATK": 10,
+            "DEF": 8,
+            "HP": 20
+          },
+          "role": "Support / Artillerie brute.",
+          "action_speciale": "Tir de Ferraille (Coût 3 ATK) : attaque à portée 2 en ligne droite, inflige de gros dégâts et ignore 2 points de DEF. Résonance de Guerre (passif) : si ce tir détruit une unité, tous les alliés Orcs adjacents au Totem gagnent +1 ATK jusqu’à ton prochain tour.",
+          "design_visuel": "Structure de métal rouillé montée sur un socle de pierre, couverte de crânes et de plaques soudées. Un énorme canon improvisé projette une pluie de débris incandescents vers l’ennemi.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "range": 2,
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ],
+            "note": "Tir de Ferraille (Coût 3 ATK) : attaque à portée 2 en ligne droite, inflige de gros dégâts et ignore 2 points de DEF. Résonance de Guerre (passif) : si ce tir détruit une unité, tous les alliés Orcs adjacents au Totem gagnent +1 ATK jusqu’à ton prochain tour."
+          },
+          "action_tags": [
+            "buff",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Gargant d’Acier",
+          "stats": {
+            "ATK": 12,
+            "DEF": 9,
+            "HP": 23
+          },
+          "role": "Pseudo‑tank offensif lent.",
+          "action_speciale": "Piétinement (Coût 3 MOVE) : se déplace d’une case en ligne droite; si une unité ennemie occupe la case d’arrivée, elle subit de lourds dégâts et est repoussée d’une case. Masse Inarrêtable (passif) : ne peut pas être repoussé ou déplacé par les effets ennemis.",
+          "design_visuel": "Colosse orc bardé de plaques de métal et de chaînes, portant une masse gigantesque. Chaque pas laisse une empreinte fumante dans le sol, expression de rage pure, yeux injectés de sang.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "note": "Piétinement (Coût 3 MOVE) : se déplace d’une case en ligne droite; si une unité ennemie occupe la case d’arrivée, elle subit de lourds dégâts et est repoussée d’une case. Masse Inarrêtable (passif) : ne peut pas être repoussé ou déplacé par les effets ennemis."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nom": "Lycans – Meutes Lunaires",
+      "style": "Hybrides humain-loup, traces de griffes, aura nocturne, runes lunaires.",
+      "gameplay": "Très mobiles, bonus si plusieurs monstres de meute se soutiennent, récompense les rotations.",
+      "champions": [
+        {
+          "lettre": "A",
+          "nom": "Alpha Lunaire",
+          "role": "Vitesse / Meute.",
+          "stats": {
+            "ATK": 8,
+            "DEF": 9,
+            "HP": 19
+          },
+          "action_speciale": "Bond de Meute (Coût 3 MOVE) : téléporte jusqu'à 2 Lycans alliés adjacents au QG vers des cases libres à portée 2. Chasseurs de Nuit : Quand un allié à portée de garde utilise une action MOVE, il gagne un jeton Vitesse (+2 ATK à la prochaine attaque).",
+          "effet_defensif": "Chasseurs de Nuit : Quand un allié à portée de garde utilise une action MOVE, il gagne un jeton Vitesse (+2 ATK à la prochaine attaque).",
+          "design_visuel": "Lycan imposant doté d'une aura nocturne et de runes lunaires, en position de bond.",
+          "effet_def_id": "on_ally_in_guard_range_move_gain_token",
+          "effet_def_params": {
+            "trigger_action": "MOVE",
+            "token": "speed",
+            "next_attack_atk_bonus": 2
+          }
+        },
+        {
+          "lettre": "B",
+          "nom": "Chasseur Solitaire",
+          "role": "Dégâts critiques / Anti-tank.",
+          "stats": {
+            "ATK": 9,
+            "DEF": 8,
+            "HP": 17
+          },
+          "action_speciale": "Frappe Vitale (Coût 3 ATK) : attaque une cible avec 8 dégâts + ignore TOUTE sa DEF si elle a moins de 50% HP. Instinct Sauvage : Les attaques normales du QG et des alliés adjacents ignorent 2 points de DEF de la cible.",
+          "effet_defensif": "Instinct Sauvage : Les attaques normales du QG et des alliés adjacents ignorent 2 points de DEF de la cible.",
+          "design_visuel": "Lycan plus fin se déplaçant à quatre pattes, laissant des traces de griffes lumineuses.",
+          "effet_def_id": "aura_attacks_ignore_def",
+          "effet_def_params": {
+            "targets": [
+              "hq_normal_attack",
+              "allies_adj_hq_normal_attack"
+            ],
+            "ignore_def": 2
+          }
+        },
+        {
+          "lettre": "C",
+          "nom": "Druide de la Clairière",
+          "role": "Contrôle de mouvement / Piège / Soutien.",
+          "stats": {
+            "ATK": 7,
+            "DEF": 10,
+            "HP": 18
+          },
+          "action_speciale": "Ronces Lunaires (Coût 3 DEF) : crée une zone de ronces (croix 3x3 autour du QG) pendant 2 tours. Les ennemis qui s'y déplacent subissent 2 dégâts directs. Empreinte Lunaire : Chaque fois qu'un monstre ennemi se déplace de 2 cases ou plus dans la portée de garde du QG, il subit 1 dégât direct.",
+          "effet_defensif": "Empreinte Lunaire : Chaque fois qu'un monstre ennemi se déplace de 2 cases ou plus dans la portée de garde du QG, il subit 1 dégât direct.",
+          "design_visuel": "Lycan aux traits plus humains, créant des pièges de ronces et de terre en touchant le sol.",
+          "effet_def_id": "on_enemy_move_long_in_guard_range_direct_damage",
+          "effet_def_params": {
+            "min_steps": 2,
+            "damage": 1,
+            "non_reducible": true
+          }
+        },
+        {
+          "lettre": "D",
+          "nom": "Reine des Ombres Lyra",
+          "role": "Mobilité / Debuff de Zone",
+          "stats": {
+            "ATK": 9,
+            "DEF": 8,
+            "HP": 16
+          },
+          "action_speciale": "Chasse Nocturne (Coût 3 MOVE) : Déplace l'unité de 3 cases. Les ennemis adjacents à la position finale subissent -1 ATK et -1 DEF pour 1 tour.",
+          "design_visuel": "Femme Lycan, très mobile et rapide. Son pelage est sombre. Des runes lunaires apparaissent au sol là où elle se déplace pour signaler le débuff.",
+          "effet_defensif": "Marques de Chasse : Les ennemis qui attaquent le QG laissent une trace visible et subissent -1 MOVE à leur prochain tour.",
+          "effet_def_id": "on_hq_attacked_apply_temp_stat_mod_next_turn",
+          "effet_def_params": {
+            "stat": "MOVE",
+            "amount": -1,
+            "duration_turns": 1
+          }
+        },
+        {
+          "lettre": "E",
+          "nom": "Gardien Céleste",
+          "role": "Tank / Contrôle de foule",
+          "stats": {
+            "ATK": 7,
+            "DEF": 11,
+            "HP": 19
+          },
+          "action_speciale": "Rugissement Alpha (Coût 4 DEF) : Immobilise tous les ennemis adjacents pour 1 tour. Le Champion gagne +3 DEF.",
+          "design_visuel": "Loup-Garou massif en armure d'os et de cuir. Sa crinière est blanche/argentée, émettant une aura de protection bleue lorsqu'il utilise son rugissement.",
+          "effet_defensif": "Aura Protectrice : Les alliés adjacents au QG ont +1 DEF. Une fois par tour adverse, un ennemi adjacent au QG ne peut pas attaquer.",
+          "effet_def_id": "aura_allies_adj_hq_def_up_and_once_per_enemy_turn_disable_attack",
+          "effet_def_params": {
+            "def_up": 1,
+            "once_per_enemy_turn_disable_attack": true
+          }
+        }
+      ],
+      "monstres": [
+        {
+          "niveau": 1,
+          "nom": "Louveteau Enragé",
+          "stats": {
+            "ATK": 7,
+            "DEF": 5,
+            "HP": 10
+          },
+          "role": "Mêlée rapide, Synergie",
+          "action_speciale": "Attaque Coordonnée (1 ATK) : Si un autre allié Lycan est adjacent à la cible, gagne +2 ATK.",
+          "design_visuel": "Jeune Lycan à la morphologie plus proche du loup que de l'humain, grandes oreilles pointues. Corps bas et élancé, penché en avant en position d'attaque, crocs apparents.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 2
+              }
+            ]
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Trappeur",
+          "stats": {
+            "ATK": 8,
+            "DEF": 5,
+            "HP": 10
+          },
+          "role": "Scout / Mobile à l'attaque (2 cases MOVE).",
+          "action_speciale": "Attaque Ciblée (1 ATK + 1 MOVE) : Si la cible est adjacente à un autre allié, vous récupérez 1 dé MOVE.",
+          "design_visuel": "Lycan léger armé de deux couteaux ou griffes, très rapide.",
+          "action_id": "heal",
+          "action_params": {}
+        },
+        {
+          "niveau": 1,
+          "nom": "Jeune Traqueur",
+          "stats": {
+            "ATK": 7,
+            "DEF": 5,
+            "HP": 10
+          },
+          "role": "Ouverture de meute mobile.",
+          "action_speciale": "Instinct de Meute (passif) : gagne +1 ATK si un autre Lycan allié est adjacent à la même cible.",
+          "design_visuel": "Jeune loup-garou élancé, à moitié accroupi, les griffes plantées dans le sol. Il regarde dans la même direction qu’un autre Lycan en arrière-plan, prêt à attaquer en duo.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ],
+            "note": "Instinct de Meute (passif) : gagne +1 ATK si un autre Lycan allié est adjacent à la même cible."
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Chasseur Alpha",
+          "stats": {
+            "ATK": 11,
+            "DEF": 4,
+            "HP": 11
+          },
+          "role": "Flanqueur / Dégâts bruts rapides.",
+          "action_speciale": "Poursuite Éclair (1 MOVE + 2 ATK) : Se déplace d'une case puis attaque. Après un déplacement, dégâts lourds.",
+          "design_visuel": "Lycan musélé en pleine charge, corps penché vers l’avant, griffes au sol. Fourrure brun-grise hérissée, crocs découverts, cicatrices de combat visibles sur le torse, regard fixé sur sa cible.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_profile": "heavy"
+          },
+          "action_tags": [
+            "damage",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Garde d'Os",
+          "stats": {
+            "ATK": 7,
+            "DEF": 9,
+            "HP": 15
+          },
+          "role": "Tank pur, Mêlée",
+          "action_speciale": "Armure d'Os (3 DEF) : Immunisé contre les effets de déplacement forcé pour 1 tour.",
+          "design_visuel": "Lycan massif dont l'armure est constituée d'os et de crânes attachés par des lanières de cuir. Posture solide et ancrée au sol, expression féroce, fourrure dense gris-brun.",
+          "action_id": "apply_status",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "ANCHOR"
+              }
+            ],
+            "duration_turns": 1,
+            "target": "self"
+          },
+          "action_tags": [
+            "control",
+            "immunity"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Sentinelle de la Meute",
+          "stats": {
+            "ATK": 7,
+            "DEF": 8,
+            "HP": 14
+          },
+          "role": "Tank de soutien / Buff DEF de zone.",
+          "action_speciale": "Formation Défensive (2 DEF) : Tous les alliés adjacents gagnent +1 DEF jusqu'à ton prochain tour.",
+          "design_visuel": "Lycan massif formant un bouclier corporel pour ses alliés.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Gardien des Terres",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 12
+          },
+          "role": "Piège / Soutien TRAP.",
+          "action_speciale": "Piège de Ronces (2 TRAP) : Pose un jeton 'Ronces'. L'ennemi qui entre ou termine son tour dessus subit 1 dégât direct et -1 MOVE.",
+          "design_visuel": "Lycan à l'apparence d'arbre et de mousse, avec des racines lumineuses.",
+          "action_id": "place_terrain_token",
+          "action_params": {
+            "damage_values": [
+              1
+            ],
+            "damage": 1,
+            "debuffs": [
+              {
+                "stat": "MOVE",
+                "amount": -1
+              }
+            ],
+            "note": "Piège de Ronces (2 TRAP) : Pose un jeton 'Ronces'. L'ennemi qui entre ou termine son tour dessus subit 1 dégât direct et -1 MOVE."
+          },
+          "action_tags": [
+            "damage",
+            "debuff",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Griffe Fantôme",
+          "stats": {
+            "ATK": 10,
+            "DEF": 5,
+            "HP": 10
+          },
+          "role": "Attaque rapide / Pénétration.",
+          "action_speciale": "Griffe Pénétrante (2 ATK) : Dégâts modérés, ignore 2 points de DEF adverse.",
+          "design_visuel": "Lycan courant si vite qu'il laisse un double spectral derrière lui.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_profile": "moderate"
+          },
+          "action_tags": [
+            "damage"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Prédateur Nocturne",
+          "stats": {
+            "ATK": 9,
+            "DEF": 6,
+            "HP": 10
+          },
+          "role": "Flanqueur rapide / Coup critique.",
+          "action_speciale": "Chasse en Meute (1 MOVE + 1 ATK) : Se déplace de 2 cases avant d'attaquer. Si un allié est adjacent à la cible, l'attaque est critique.",
+          "design_visuel": "Lycan élancé au pelage noir profond, presque invisible sauf pour ses yeux jaunes lumineux. Corps bas et tendu, griffes rétractées sur le point de s’étendre, silhouette furtive en demi-accroupi.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Chasse en Meute (1 MOVE + 1 ATK) : Se déplace de 2 cases avant d'attaquer. Si un allié est adjacent à la cible, l'attaque est critique."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Hurleur Spirituel",
+          "stats": {
+            "ATK": 7,
+            "DEF": 8,
+            "HP": 14
+          },
+          "role": "Contrôle de foule par rugissement.",
+          "action_speciale": "Rugissement Terrifiant (Coût 3 DEF) : tous les ennemis adjacents subissent au choix -1 MOVE ou -1 ATK jusqu’à la fin de leur prochain tour.",
+          "design_visuel": "Lycan dressé de toute sa hauteur, la tête rejetée en arrière dans un hurlement. Une onde sonore bleutée se propage en cercle autour de lui, faisant reculer ou flancher les silhouettes ennemies.",
+          "action_id": "apply_debuff",
+          "action_params": {
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -1
+              },
+              {
+                "stat": "MOVE",
+                "amount": -1
+              }
+            ]
+          },
+          "action_tags": [
+            "debuff"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Vocaliseur d’Alpha",
+          "stats": {
+            "ATK": 8,
+            "DEF": 7,
+            "HP": 14
+          },
+          "role": "Buff offensif et debuff ciblé.",
+          "action_speciale": "Chant de Meute (Coût 2 MOVE) : les Lycans alliés à portée 2 gagnent +1 ATK pour leur prochaine attaque ce tour. Hurlement Ciblé (Coût 2 ATK) : un ennemi à portée 2 subit -1 ATK jusqu’à son prochain tour.",
+          "design_visuel": "Lycan chamane, portant des colliers d’os et de griffes. Il hurle vers le ciel, tandis que des marques luminescentes se dessinent sous les pattes de ses alliés.",
+          "action_id": "buff_self",
+          "action_params": {
+            "range": 2,
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ],
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff",
+            "debuff",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Croc de l’Éclipse",
+          "stats": {
+            "ATK": 10,
+            "DEF": 8,
+            "HP": 15
+          },
+          "role": "Finisseur intermédiaire.",
+          "action_speciale": "Morsure Crépusculaire (Coût 3 ATK) : si la cible est à moins de 50% de ses HP max, cette attaque gagne un bonus important de dégâts. Si la cible est détruite par cette attaque, Croc de l’Éclipse récupère 2 HP.",
+          "design_visuel": "Loup-garou sombre aux yeux brillants, avec un croissant de lune en arrière-plan. Sa gueule est entourée d’une aura noire et argentée lorsqu’il frappe une cible affaiblie.",
+          "action_id": "heal",
+          "action_params": {
+            "chance": 0.5
+          },
+          "action_tags": [
+            "chance"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Briseur de Lune",
+          "stats": {
+            "ATK": 11,
+            "DEF": 7,
+            "HP": 16
+          },
+          "role": "Bruiser agressif.",
+          "action_speciale": "Assaut en Ligne (Coût 3 ATK) : attaque en ligne droite toutes les unités ennemies sur 2 cases, infligeant des dégâts modérés. Rage du Croissant (passif) : gagne +2 ATK tant qu’il a moins de la moitié de ses HP max.",
+          "design_visuel": "Lycan au pelage sombre, portant des cicatrices visibles, chargeant en ligne avec ses griffes en avant. Une lune brisée est représentée derrière lui, symbolisant sa rage lorsqu’il est blessé.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "damage_profile": "moderate",
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 2
+              }
+            ],
+            "note": "Assaut en Ligne (Coût 3 ATK) : attaque en ligne droite toutes les unités ennemies sur 2 cases, infligeant des dégâts modérés. Rage du Croissant (passif) : gagne +2 ATK tant qu’il a moins de la moitié de ses HP max."
+          },
+          "action_tags": [
+            "buff",
+            "damage",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Croc d'Acier",
+          "stats": {
+            "ATK": 12,
+            "DEF": 6,
+            "HP": 13
+          },
+          "role": "Finisseur / Anti-tank.",
+          "action_speciale": "Frappe Mortelle (3 ATK + 1 MOVE) : Si la cible a moins de 50 % de ses PV max, l'attaque est critique.",
+          "design_visuel": "Lycan géant aux griffes recouvertes d'éclats métalliques fichés dans la chair. Bras levé prêt à frapper, muscles saillants sous la fourrure gris acier, regard vide et concentré.",
+          "action_id": "execute_crit",
+          "action_params": {
+            "chance": 0.5,
+            "threshold_hp_pct": 0.5
+          },
+          "action_tags": [
+            "chance"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Prédicateur de la Lune",
+          "stats": {
+            "ATK": 8,
+            "DEF": 8,
+            "HP": 15
+          },
+          "role": "Contrôle de mouvement de zone.",
+          "action_speciale": "Brume Entravante (3 TRAP) : Tous les ennemis à portée 2 ne peuvent pas utiliser MOVE à leur prochain tour.",
+          "design_visuel": "Lycan levant un bâton vers la lune, une brume lunaire couvrant le sol.",
+          "action_id": "apply_status",
+          "action_params": {
+            "range": 2,
+            "apply_status": [
+              {
+                "status": "ROOT"
+              }
+            ]
+          },
+          "action_tags": [
+            "control",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Totemiste Runique",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 13
+          },
+          "role": "Soutien / Buffer de MOVE.",
+          "action_speciale": "Impulsion Lunaire (2 MOVE) : Cible un allié à portée 2 qui gagne +1 MOVE pour ce tour et le suivant.",
+          "design_visuel": "Lycan brandissant un totem d'os et de gemme bleue pulsant d'énergie.",
+          "action_id": "buff_self",
+          "action_params": {
+            "range": 2,
+            "duration_turns": 2,
+            "buffs": [
+              {
+                "stat": "MOVE",
+                "amount": 1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Grand Lycan Lunaire",
+          "stats": {
+            "ATK": 14,
+            "DEF": 7,
+            "HP": 18
+          },
+          "role": "Très fort en ATK, très rapide.",
+          "action_speciale": "Bond Lunaire (3 MOVE + 2 ATK) : Se déplace de 3 cases puis attaque. Après un déplacement de 3 cases, l'attaque est critique.",
+          "design_visuel": "Lycan ultime, plus grand et plus agile que les autres, à la fourrure grise argentée.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Bond Lunaire (3 MOVE + 2 ATK) : Se déplace de 3 cases puis attaque. Après un déplacement de 3 cases, l'attaque est critique."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Dévoreur Primordial",
+          "stats": {
+            "ATK": 11,
+            "DEF": 8,
+            "HP": 21
+          },
+          "role": "Finisseur de meute.",
+          "action_speciale": "Voracité de Meute (passif) : gagne +1 ATK pour chaque autre Lycan adjacent (max +3). Déchireur de la Nuit (Coût 4 ATK) : si au moins deux Lycans sont adjacents à la cible, peut attaquer deux cibles différentes adjacentes l’une à l’autre.",
+          "design_visuel": "Loup-garou titanesque aux crocs d’obsidienne, entouré d’une meute d’ombres lupines. Sa gueule semble absorber la lumière autour de lui lorsqu’il se jette au combat.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ],
+            "note": "Voracité de Meute (passif) : gagne +1 ATK pour chaque autre Lycan adjacent (max +3). Déchireur de la Nuit (Coût 4 ATK) : si au moins deux Lycans sont adjacents à la cible, peut attaquer deux cibles différentes adjacentes l’une à l’autre."
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Esprit de la Lune",
+          "stats": {
+            "ATK": 7,
+            "DEF": 10,
+            "HP": 20
+          },
+          "role": "Soutien / Repositionnement.",
+          "action_speciale": "Chemin de Clair de Lune (Coût 3 MOVE) : téléporte un Lycan allié à portée 3 vers une case vide adjacente à l’Esprit. Bénédiction Lunaire (Coût 3 DEF) : si tu contrôles une zone clé (à définir dans tes règles), tous les Lycans alliés gagnent +1 ATK jusqu’à ton prochain tour. Lueur Régénératrice : soigne 2 HP à chaque Lycan adjacent lors de ton tour.",
+          "design_visuel": "Silhouette semi-transparente de loup dressé, composée de lumière argentée. Un halo de lune éclaire les cases autour de lui, avec des particules lumineuses qui se rassemblent sur les alliés.",
+          "action_id": "teleport",
+          "action_params": {
+            "range": 3,
+            "buffs": [
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ]
+          },
+          "action_tags": [
+            "buff",
+            "ranged",
+            "terrain_like"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "nom": "Égypte – Dynasties Solaires",
+      "style": "Masques dorés, scarabées, obélisques, hiéroglyphes lumineux.",
+      "gameplay": "Jeux avec la mort (momification, résurrections limitées), QG très défensif, peut sceller des tuiles.",
+      "champions": [
+        {
+          "lettre": "A",
+          "nom": "Pharaon Immortel",
+          "role": "Jeu avec la mort / Défense.",
+          "stats": {
+            "ATK": 7,
+            "DEF": 13,
+            "HP": 20
+          },
+          "action_speciale": "Édit d'Immortalité (Coût 4 DEF) : le prochain allié adjacent au QG qui serait détruit cette phase est placé à 1 HP à la place et gagne +2 DEF jusqu'à ton prochain tour. Bénédiction de Râ : Si le QG n'a pas été attaqué au tour précédent, il gagne +1 DEF jusqu'à la fin du tour adverse (cumulable).",
+          "effet_defensif": "Bénédiction de Râ : Si le QG n'a pas été attaqué au tour précédent, il gagne +1 DEF jusqu'à la fin du tour adverse (cumulable).",
+          "design_visuel": "Silhouette humanoïde dorée aux parures pharaoniques massives, entourée de hiéroglyphes lumineux.",
+          "effet_def_id": "if_hq_not_attacked_prev_turn_gain_def",
+          "effet_def_params": {
+            "def_bonus": 1,
+            "duration": "until_end_enemy_turn",
+            "stackable": true
+          }
+        },
+        {
+          "lettre": "B",
+          "nom": "Prêtresse de la Momification",
+          "role": "Résurrection / Soin / Support DEF.",
+          "stats": {
+            "ATK": 7,
+            "DEF": 10,
+            "HP": 17
+          },
+          "action_speciale": "Bandelettes Vitales (Coût 3 DEF) : soigne 4 HP à un allié adjacent au QG ET ressuscite une unité détruite alliée de niveau ≤3 à 50% HP max (1 fois par partie). Cycle de Vie : Une fois par tour, quand un monstre ennemi est détruit à portée 3 du QG, vous pouvez soigner 2 HP à un allié adjacent au QG.",
+          "effet_defensif": "Cycle de Vie : Une fois par tour, quand un monstre ennemi est détruit à portée 3 du QG, vous pouvez soigner 2 HP à un allié adjacent au QG.",
+          "design_visuel": "Femme en robes de lin blanc et d'or, tenant des bandelettes et un scarabée lumineux.",
+          "effet_def_id": "once_per_turn_on_enemy_killed_within_radius_heal_ally_adj_hq",
+          "effet_def_params": {
+            "radius": 3,
+            "heal": 2,
+            "target": "ally_adj_hq"
+          }
+        },
+        {
+          "lettre": "C",
+          "nom": "Gardien des Sables",
+          "role": "Anti-mage / Contrôle de zone / Anti-trap.",
+          "stats": {
+            "ATK": 8,
+            "DEF": 11,
+            "HP": 20
+          },
+          "action_speciale": "Tourbillon de Grès (Coût 3 ATK) : inflige 3 dégâts à tous les ennemis à portée 2 ET désactive TOUS les TRAP/débuffs ennemis sur ces cases. Tempête de Sables : Au début du tour adverse, tous les jetons TRAP/Sceau/Contrôle ennemis dans la portée de garde sont désactivés pour ce tour.",
+          "effet_defensif": "Tempête de Sables : Au début du tour adverse, tous les jetons TRAP/Sceau/Contrôle ennemis dans la portée de garde sont désactivés pour ce tour.",
+          "design_visuel": "Grande statue animée faite de grès et de basalte, au design massif et solide.",
+          "effet_def_id": "enemy_turn_start_disable_enemy_tokens_in_guard_range",
+          "effet_def_params": {
+            "token_types": [
+              "TRAP",
+              "Sceau",
+              "Contrôle"
+            ],
+            "duration_turns": 1
+          }
+        },
+        {
+          "lettre": "D",
+          "nom": "Serapia, la Vengeresse",
+          "role": "Déplacement Forcé / Affliction",
+          "stats": {
+            "ATK": 9,
+            "DEF": 7,
+            "HP": 16
+          },
+          "action_speciale": "Malédiction du Serpent (Coût 3 ATK) : Inflige 9 dégâts. L'ennemi est déplacé d'une case dans la direction opposée à l'unité.",
+          "design_visuel": "Reine en armure serpentiforme et agile. Elle maudit les ennemis et manipule le mouvement.",
+          "effet_defensif": "Reflux Maudit : Quand le QG est attaqué, l'attaquant est repoussé d'une case et subit -1 ATK jusqu'à ton prochain tour.",
+          "effet_def_id": "on_hq_attacked_push_attacker_and_temp_stat_mod",
+          "effet_def_params": {
+            "push_steps": 1,
+            "stat": "ATK",
+            "amount": -1,
+            "duration": "until_start_next_turn"
+          }
+        },
+        {
+          "lettre": "E",
+          "nom": "Grand Vizir Ptah",
+          "role": "Soutien / Soin / Dissipation",
+          "stats": {
+            "ATK": 6,
+            "DEF": 10,
+            "HP": 17
+          },
+          "action_speciale": "Bénédiction du Nil (Coût 3 DEF) : Soigne un allié à Portée 3 de 4 HP. Supprime un jeton 'Piège' ou 'Débuff' sur la cible.",
+          "design_visuel": "Sage en robes blanches. Il tient un bâton orné d'un scarabée. Ses capacités soignent et dissipent les pièges.",
+          "effet_defensif": "Protection du Nil : Au début du tour adverse, retire un debuff ou TRAP sur le QG et soigne 1 HP à tous les alliés adjacents.",
+          "effet_def_id": "enemy_turn_start_cleanse_hq_and_heal_adj_allies",
+          "effet_def_params": {
+            "cleanse_types": [
+              "debuff",
+              "TRAP"
+            ],
+            "heal_adj_allies": 1
+          }
+        }
+      ],
+      "monstres": [
+        {
+          "niveau": 1,
+          "nom": "Momie Éclaireur",
+          "stats": {
+            "ATK": 6,
+            "DEF": 5,
+            "HP": 10
+          },
+          "role": "Mobilité, Débuff MOVE",
+          "action_speciale": "Linceul Lourd (2 MOVE) : L'ennemi traversé subit -1 MOVE lors de son prochain tour.",
+          "design_visuel": "Momie rapide aux bandages légèrement effilochés qui traînent derrière elle. Yeux lumineux bleu lazuli brillant dans le creux du visage, silhouette élancée et posture furtive.",
+          "action_id": "apply_debuff",
+          "action_params": {
+            "debuffs": [
+              {
+                "stat": "MOVE",
+                "amount": -1
+              }
+            ]
+          },
+          "action_tags": [
+            "debuff"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Porteur de Scarabées",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 9
+          },
+          "role": "Unité équilibrée / Utilitaire de sceau.",
+          "action_speciale": "Poussière d'Étoile (2 TRAP) : Cible un ennemi à portée 1 qui subit -1 ATK pour sa prochaine action d'attaque.",
+          "design_visuel": "Humain en armure égyptienne simple avec un bouclier orné d'un scarabée.",
+          "action_id": "apply_debuff",
+          "action_params": {
+            "range": 1,
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -1
+              }
+            ]
+          },
+          "action_tags": [
+            "debuff",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Archonte Soléaire",
+          "stats": {
+            "ATK": 9,
+            "DEF": 6,
+            "HP": 12
+          },
+          "role": "Rôdeur / Dégâts de malédiction.",
+          "action_speciale": "Malédiction (3 ATK) : Dégâts lourds. Si l'ennemi survit, il subit 1 dégât direct au début de son prochain tour.",
+          "design_visuel": "Humain avec un casque en forme de tête de faucon, portant une lance.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_values": [
+              1
+            ],
+            "damage": 1,
+            "damage_profile": "heavy"
+          },
+          "action_tags": [
+            "damage"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Défenseur du Sphinx",
+          "stats": {
+            "ATK": 6,
+            "DEF": 10,
+            "HP": 15
+          },
+          "role": "Super tank de base / Très haute DEF.",
+          "action_speciale": "Mur de Pierre (2 DEF + 1 MOVE) : Gagne +4 DEF jusqu'au prochain tour, mais ne peut pas se déplacer au tour suivant.",
+          "design_visuel": "Unité lourde en armure, inspirée par le Sphinx.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 4
+              }
+            ]
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Statue de Basalte",
+          "stats": {
+            "ATK": 5,
+            "DEF": 10,
+            "HP": 14
+          },
+          "role": "Mur défensif, Immobile",
+          "action_speciale": "Enracinement (1 DEF) : Gagne +4 DEF, mais ne peut pas bouger au prochain tour.",
+          "design_visuel": "Statue humanoïde de pierre noire brillante, masque pharaonique stylisé et bras croisés sur la poitrine. Silhouette compacte et robuste, gravures hiéroglyphiques visibles sur le corps.",
+          "action_id": "buff_self",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 4
+              }
+            ]
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Scribe Funéraire",
+          "stats": {
+            "ATK": 6,
+            "DEF": 8,
+            "HP": 11
+          },
+          "role": "Contrôle de zone / Sceau.",
+          "action_speciale": "Sceau d'Osiris (3 DEF) : Place un jeton 'Sceau' sur la case ciblée, qui ne peut pas être traversée par l'ennemi.",
+          "design_visuel": "Prêtre masqué portant un rouleau, traçant des hiéroglyphes au sol qui deviennent des sceaux physiques.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Sceau d'Osiris (3 DEF) : Place un jeton 'Sceau' sur la case ciblée, qui ne peut pas être traversée par l'ennemi."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Sentinelle de l'Obélisque",
+          "stats": {
+            "ATK": 7,
+            "DEF": 10,
+            "HP": 16
+          },
+          "role": "Anti-trap / Zoning.",
+          "action_speciale": "Aura de Dissipation (2 DEF) : Le monstre et ses alliés adjacents ignorent les effets des jetons TRAP/Sceau ennemis jusqu'à ton prochain tour.",
+          "design_visuel": "Gardien immobile avec un bouclier en forme d'obélisque.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Aura de Dissipation (2 DEF) : Le monstre et ses alliés adjacents ignorent les effets des jetons TRAP/Sceau ennemis jusqu'à ton prochain tour."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Soigneur de l'Oasis",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 12
+          },
+          "role": "Soin / Support.",
+          "action_speciale": "Bain de Vie (2 TRAP) : Soigne 3 HP à lui-même ou à un allié adjacent.",
+          "design_visuel": "Humain portant des jarres canopes, infusant un allié blessé avec une eau dorée.",
+          "action_id": "heal",
+          "action_params": {}
+        },
+        {
+          "niveau": 3,
+          "nom": "Augure Maudit",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 13
+          },
+          "role": "Malédiction ciblée.",
+          "action_speciale": "Sceau du Sable (Coût 3 ATK) : une cible à portée 2 subit un malus de -2 ATK ou -2 DEF (au choix) jusqu’à la fin de son prochain tour.",
+          "design_visuel": "Mage emmailloté dans des bandages, portant un sceptre terminé par un œil stylisé. Des glyphes de sable tourbillonnent autour de la cible lorsqu’il lance sa malédiction.",
+          "action_id": "apply_debuff",
+          "action_params": {
+            "range": 2,
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -2
+              },
+              {
+                "stat": "DEF",
+                "amount": -2
+              }
+            ]
+          },
+          "action_tags": [
+            "debuff",
+            "ranged",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Champion du Disque Solaire",
+          "stats": {
+            "ATK": 9,
+            "DEF": 8,
+            "HP": 15
+          },
+          "role": "Burst solaire ciblé, combo avec la Statue.",
+          "action_speciale": "Rayon du Disque (Coût 3 ATK) : attaque en ligne de 2–3 cases, infligeant des dégâts moyens. Les ennemis touchés subissent -1 ATK jusqu’à ton prochain tour. Si la Statue du Disque Solaire alliée est en jeu, cette attaque inflige +2 dégâts au premier ennemi touché.",
+          "design_visuel": "Guerrier en armure dorée avec un grand disque solaire derrière son dos. Il pointe sa lame ou son sceptre vers l’avant, projetant un rayon de lumière concentrée le long d’un couloir.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_values": [
+              2
+            ],
+            "damage": 2,
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -1
+              }
+            ]
+          },
+          "action_tags": [
+            "damage",
+            "debuff",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Héraut de Râ",
+          "stats": {
+            "ATK": 10,
+            "DEF": 7,
+            "HP": 16
+          },
+          "role": "Burst lumineux de zone.",
+          "action_speciale": "Flamboiement Sacré (Coût 4 ATK) : attaque de zone en croix (cible plus les 4 cases orthogonales), infligeant des dégâts moyens. Les ennemis touchés subissent au choix un debuff de précision ou -1 MOVE jusqu’à la fin de leur prochain tour.",
+          "design_visuel": "Figure élancée portant un masque solaire et tenant un bâton flamboyant. Une croix de lumière se déploie autour du point d’impact lorsque la capacité est utilisée.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "debuffs": [
+              {
+                "stat": "MOVE",
+                "amount": -1
+              }
+            ]
+          },
+          "action_tags": [
+            "debuff",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Statue du Disque Solaire",
+          "stats": {
+            "ATK": 8,
+            "DEF": 10,
+            "HP": 18
+          },
+          "role": "Zone défensive/offensive, combo avec le Champion.",
+          "action_speciale": "Rayon Immuable (Coût 3 ATK) : crée un rayon en ligne de 2–3 cases infligeant des dégâts moyens et appliquant -1 ATK aux ennemis touchés jusqu’à leur prochain tour. Ancrage du Disque (passif) : si la Statue ne bouge pas durant ton tour, elle gagne +1 DEF jusqu’à ton prochain tour. Aura du Disque : si le Champion du Disque Solaire allié est adjacent à la Statue ou à portée 1, il gagne +1 ATK et +1 DEF.",
+          "design_visuel": "Grande statue de pierre dorée représentant un disque solaire soutenu par deux bras. Des rayons de lumière rectilignes jaillissent du disque, et sa base est entourée de dalles gravées de hiéroglyphes.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "range": 1,
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 1
+              },
+              {
+                "stat": "DEF",
+                "amount": 1
+              },
+              {
+                "stat": "ATK",
+                "amount": 1
+              }
+            ],
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -1
+              }
+            ],
+            "note": "Rayon Immuable (Coût 3 ATK) : crée un rayon en ligne de 2–3 cases infligeant des dégâts moyens et appliquant -1 ATK aux ennemis touchés jusqu’à leur prochain tour. Ancrage du Disque (passif) : si la Statue ne bouge pas durant ton tour, elle gagne +1 DEF jusqu’à ton prochain tour. Aura du Disque : si le Champion du Disque Solaire allié est adjacent à la Statue ou à portée 1, il gagne +1 ATK et +1 DEF."
+          },
+          "action_tags": [
+            "buff",
+            "debuff",
+            "ranged",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Animateur de Mort",
+          "stats": {
+            "ATK": 8,
+            "DEF": 7,
+            "HP": 13
+          },
+          "role": "Résurrection limitée.",
+          "action_speciale": "Rappel Funéraire (4 TRAP) : Ramène sur le plateau un allié Lv1 ou Lv2 détruit adjacent avec 1 HP. Coûte son prochain tour.",
+          "design_visuel": "Prêtre masqué tirant la silhouette spectrale d'un allié vers le haut dans une lumière dorée.",
+          "action_id": "revive_adjacent",
+          "action_params": {
+            "revive_levels": [
+              1,
+              2
+            ],
+            "revive_hp": 1,
+            "requires_adjacent": true,
+            "skip_next_turn": true
+          },
+          "action_tags": [
+            "revive"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Garde Ancien",
+          "stats": {
+            "ATK": 8,
+            "DEF": 12,
+            "HP": 15
+          },
+          "role": "Super tank / Tenir la ligne.",
+          "action_speciale": "Protection Divine (4 DEF) : +5 DEF et une riposte gratuite contre le premier ennemi qui l'attaque ce tour-là.",
+          "design_visuel": "Colosse humanoïde taillé dans l’or massif, surface lisse et brillante gravée de hiéroglyphes incandescents. Bras croisés sur la poitrine, torse large, masque pharaonique animé aux yeux lumineux ambre.",
+          "action_id": "buff_def_and_counter",
+          "action_params": {
+            "buffs": [
+              {
+                "stat": "DEF",
+                "amount": 5
+              }
+            ],
+            "counter_first_attack": true
+          },
+          "action_tags": [
+            "buff"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Mage de l'Oubli",
+          "stats": {
+            "ATK": 9,
+            "DEF": 6,
+            "HP": 12
+          },
+          "role": "Silence / Anti-magie.",
+          "action_speciale": "Vague de Silence (3 ATK + 1 TRAP) : Cible un ennemi à portée 2, silencié pour un tour (incapable d'utiliser des capacités spéciales).",
+          "design_visuel": "Mage couvert de hiéroglyphes levant les mains pour créer une onde d'énergie de sable.",
+          "action_id": "apply_status",
+          "action_params": {
+            "range": 2,
+            "apply_status": [
+              {
+                "status": "SILENCE"
+              }
+            ]
+          },
+          "action_tags": [
+            "control",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Sphinx Céleste",
+          "stats": {
+            "ATK": 9,
+            "DEF": 13,
+            "HP": 21
+          },
+          "role": "Gardien défensif / Contrôle de zone.",
+          "action_speciale": "Énigme d'Immobilisation (5 DEF) : Le Sphinx et tous les alliés à portée 1 ne peuvent pas être déplacés ou repoussés jusqu'à la fin de la partie.",
+          "design_visuel": "Sphinx massif mi-lion mi-humain taillé dans du marbre blanc veiné d’or. Pattes avant posées, ailes de faucon déployées, couronne nemes brillante, regard immobile et éternel, hiéroglyphes gravés sur le flanc.",
+          "action_id": "apply_status_aura_end_game",
+          "action_params": {
+            "range": 1,
+            "duration": "end_game",
+            "apply_status": [
+              {
+                "status": "ANCHOR"
+              }
+            ],
+            "target": "self_and_allies"
+          },
+          "action_tags": [
+            "control",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Avatar du Pharaon",
+          "stats": {
+            "ATK": 10,
+            "DEF": 8,
+            "HP": 20
+          },
+          "role": "Contrôle de mouvement / Malédictions.",
+          "action_speciale": "Décret Royal (Coût 3 MOVE) : déplace un ennemi d’une case dans la direction de ton choix. Malédiction du Trône (Coût 3 ATK) : inflige des dégâts modérés et applique une malédiction (-2 ATK et -2 DEF) jusqu’à la fin du prochain tour de l’ennemi; la cible subit 2 dégâts directs au début de son tour.",
+          "design_visuel": "Figure imposante en armure dorée, portant une couronne pharaonique et un sceptre. Des hiéroglyphes lumineux flottent autour de lui et se fixent sur sa cible lorsqu’il lance une malédiction.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_values": [
+              2
+            ],
+            "damage": 2,
+            "damage_profile": "moderate",
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -2
+              },
+              {
+                "stat": "DEF",
+                "amount": -2
+              }
+            ]
+          },
+          "action_tags": [
+            "damage",
+            "debuff",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Gardien du Nil",
+          "stats": {
+            "ATK": 7,
+            "DEF": 11,
+            "HP": 22
+          },
+          "role": "Soin et purification extrême.",
+          "action_speciale": "Bénédiction du Fleuve (Coût 3 DEF) : soigne un allié à portée 2 de 5 HP et retire jusqu’à deux TRAP ou debuffs sur lui. Marée de Renaissance (Coût 4 DEF) : ressuscite un monstre allié détruit de niveau 4 ou moins sur une case adjacente avec 50% de ses HP max et -1 ATK jusqu’à la fin de la partie.",
+          "design_visuel": "Colosse de pierre bleutée portant une jarre d’eau sacrée. Des flots éthérés s’écoulent de ses mains et enveloppent les alliés, lavant les malédictions et reformant des silhouettes de statues brisées.",
+          "action_id": "heal",
+          "action_params": {
+            "range": 2,
+            "chance": 0.5,
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -1
+              }
+            ]
+          },
+          "action_tags": [
+            "chance",
+            "debuff",
+            "ranged",
+            "terrain_like"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nom": "Abominations – Fractaux Oniriques",
+      "style": "Formes géométriques impossibles, semi-transparents, glitchés, symboles de rêve ou de bug.",
+      "gameplay": "Effets étranges : inversion de stats, échange de position, tuiles temporaires. Imprévisibilité.",
+      "champions": [
+        {
+          "lettre": "A",
+          "nom": "Entité Fractale",
+          "role": "Mindgame / Inversion.",
+          "stats": {
+            "ATK": 6,
+            "DEF": 9,
+            "HP": 17
+          },
+          "action_speciale": "Inversion de Réalité (Coût 3 MOVE) : échange ATK et DEF de base d'une unité ennemie à portée 2 pour 2 tours. Glitch du Nexus : Quand un ennemi attaque le QG, sur un résultat de 5+ au dé, l'attaque est annulée et l'ennemi est téléporté sur une case aléatoire adjacente.",
+          "effet_defensif": "Glitch du Nexus : Quand un ennemi attaque le QG, sur un résultat de 5+ au dé, l'attaque est annulée et l'ennemi est téléporté sur une case aléatoire adjacente.",
+          "design_visuel": "Forme humanoïde faite de polygones lumineux qui se déconstruit et se reconstruit constamment, semi-transparente et glitchée.",
+          "effet_def_id": "on_hq_attacked_roll_cancel_and_teleport_attacker",
+          "effet_def_params": {
+            "roll_threshold": 5,
+            "cancel_attack": true,
+            "teleport": "adjacent_random"
+          }
+        },
+        {
+          "lettre": "B",
+          "nom": "Maître des Illusions",
+          "role": "Confusion / Changement de cible.",
+          "stats": {
+            "ATK": 6,
+            "DEF": 10,
+            "HP": 16
+          },
+          "action_speciale": "Illusion Multiplicatrice (Coût 3 DEF) : crée 2 leurres adjacents au QG (1 tour). Les attaques ennemies doivent d'abord les cibler. Réfraction de Cible : Quand un monstre ennemi est ciblé par une attaque à portée de garde, il y a 1 chance sur 3 que la cible soit changée pour une autre unité ennemie aléatoire.",
+          "effet_defensif": "Réfraction de Cible : Quand un monstre ennemi est ciblé par une attaque à portée de garde, il y a une chance sur 3 que la cible soit changée pour une autre unité ennemie aléatoire.",
+          "design_visuel": "Entité ressemblant à un miroir brisé, générant une copie holographique pour tromper l'ennemi.",
+          "effet_def_id": "on_targeted_by_guard_range_attack_chance_swap_target",
+          "effet_def_params": {
+            "chance": 0.3333333333333333,
+            "swap_to": "other_enemy_random"
+          }
+        },
+        {
+          "lettre": "C",
+          "nom": "Chaos Élémentaire",
+          "role": "Inversion de stats / Dégâts sur glitch.",
+          "stats": {
+            "ATK": 8,
+            "DEF": 7,
+            "HP": 18
+          },
+          "action_speciale": "Tempête de Glitch (Coût 4 ATK) : inflige 2 dégâts à TOUS les ennemis à portée 2 ET inverse leurs ATK/DEF pour 1 tour. Débordement du Rêve : Quand une unité (alliée ou ennemie) subit un dégât direct non-réductible, le Champion gagne 1 dé DEF dans le pool.",
+          "effet_defensif": "Débordement du Rêve : Quand une unité (alliée ou ennemie) subit un dégât direct non-réductible, le Champion gagne 1 dé DEF dans le pool.",
+          "design_visuel": "Assemblage instable de lumières et de formes, émettant des éclairs de couleurs vives et aléatoires.",
+          "effet_def_id": "on_any_unit_nonreducible_damage_gain_pool_die",
+          "effet_def_params": {
+            "pool": "DEF",
+            "dice": 1
+          }
+        },
+        {
+          "lettre": "D",
+          "nom": "Artificier de Glitch",
+          "role": "Leurre / Confusion",
+          "stats": {
+            "ATK": 8,
+            "DEF": 8,
+            "HP": 15
+          },
+          "action_speciale": "Glitch Cérébral (Coût 3 MOVE) : Crée une copie 'Leurre' de l'unité adjacente. Le prochain ennemi qui attaque ce leurre se blesse de 5 HP.",
+          "effet_defensif": "Réflexion Traîtresse : Quand le QG est attaqué, 50% de chances que l'attaquant cible une unité ennemie adjacente à la place.",
+          "design_visuel": "Silhouette humanoïde faite de circuits imprimés défectueux et de connexions électriques qui crépitent. Son corps génère constamment des leurres glitchés (copies pixellisées déformées) qui flottent autour de lui. Des lignes de code RGB défilent sur sa surface et des parasites numériques jaillissent de ses mains lorsqu'il crée un leurre.",
+          "effet_def_id": "on_hq_attacked_chance_redirect_attack_to_unit",
+          "effet_def_params": {
+            "chance": 0.5,
+            "redirect_to": "enemy_unit_adj_hq_if_any"
+          }
+        },
+        {
+          "lettre": "E",
+          "nom": "Manipulateur d'Espace",
+          "role": "Placement / Téléportation",
+          "stats": {
+            "ATK": 8,
+            "DEF": 7,
+            "HP": 16
+          },
+          "action_speciale": "Vortex Dimensionnel (Coût 4 MOVE) : Téléporte une unité alliée à Portée 3 vers une case vide à Portée 1 (y compris lui-même).",
+          "design_visuel": "Créature qui utilise des fragments de l'espace pour se déplacer. Son corps est une ligne de couleur vive, presque abstraite.",
+          "effet_defensif": "Déplacement Instable : Les ennemis adjacents au QG ont 50% de chances d'être téléportés sur une case aléatoire adjacente après leur attaque.",
+          "effet_def_id": "aura_enemies_adj_hq_chance_teleport_after_attack",
+          "effet_def_params": {
+            "chance": 0.5,
+            "teleport": "adjacent_random",
+            "timing": "after_attack"
+          }
+        }
+      ],
+      "monstres": [
+        {
+          "niveau": 1,
+          "nom": "Fragment Instable",
+          "stats": {
+            "ATK": 6,
+            "DEF": 5,
+            "HP": 7
+          },
+          "role": "Très fragile / Piège personnel.",
+          "action_speciale": "Déphasage (2 MOVE) : Si un ennemi termine son tour sur la case que le Fragment vient de quitter, il subit 2 dégâts directs.",
+          "design_visuel": "Petit prisme flottant laissant des traînées de lumière éphémères.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_values": [
+              2
+            ],
+            "damage": 2
+          },
+          "action_tags": [
+            "damage",
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Fragment Primaire",
+          "stats": {
+            "ATK": 7,
+            "DEF": 6,
+            "HP": 9
+          },
+          "role": "ATK de base, Glitch",
+          "action_speciale": "Décalage (2 ATK) : L'ennemi ne peut pas utiliser son action de base lors de son prochain tour.",
+          "design_visuel": "Entité géométrique en forme de prisme aux arêtes vives, constituée de lignes nettes bleu et rouge. Des pixels se détachent de son contour par intermittence, forme instable et semi-transparente.",
+          "action_id": "apply_status",
+          "action_params": {
+            "apply_status": [
+              {
+                "status": "BASIC_LOCK"
+              }
+            ]
+          },
+          "action_tags": [
+            "control"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Écho Glitché",
+          "stats": {
+            "ATK": 6,
+            "DEF": 6,
+            "HP": 8
+          },
+          "role": "Punition de l’agression au contact.",
+          "action_speciale": "Retour d’Erreur (passif) : la première fois qu’un ennemi adjacent attaque Echo Glitché chaque tour, cet ennemi subit 1 dégât direct après la résolution de son attaque.",
+          "design_visuel": "Petite silhouette floue composée de lignes et de pixels dédoublés, comme une image qui bug. Lorsqu’elle est frappée, un écho visuel de l’assaillant apparaît brièvement et se fissure.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "damage_values": [
+              1
+            ],
+            "damage": 1,
+            "note": "Retour d’Erreur (passif) : la première fois qu’un ennemi adjacent attaque Echo Glitché chaque tour, cet ennemi subit 1 dégât direct après la résolution de son attaque."
+          },
+          "action_tags": [
+            "damage"
+          ]
+        },
+        {
+          "niveau": 1,
+          "nom": "Fragment Miroir",
+          "stats": {
+            "ATK": 6,
+            "DEF": 6,
+            "HP": 8
+          },
+          "role": "Nuisance défensive.",
+          "action_speciale": "Réflexion Fragilisante (passif) : quand le Fragment Miroir est détruit par une attaque au contact, l’attaquant subit -1 ATK jusqu’à la fin de son prochain tour.",
+          "design_visuel": "Éclat de verre flottant, reflétant une version déformée du champ de bataille. Lorsque brisé, des fragments de lumière se plantent dans l’assaillant.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "debuffs": [
+              {
+                "stat": "ATK",
+                "amount": -1
+              }
+            ],
+            "note": "Réflexion Fragilisante (passif) : quand le Fragment Miroir est détruit par une attaque au contact, l’attaquant subit -1 ATK jusqu’à la fin de son prochain tour."
+          },
+          "action_tags": [
+            "debuff"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Entité Rémanente",
+          "stats": {
+            "ATK": 7,
+            "DEF": 8,
+            "HP": 13
+          },
+          "role": "Pivot / Échange de position.",
+          "action_speciale": "Transfert Court (3 MOVE) : Échange immédiatement de position avec un allié adjacent.",
+          "design_visuel": "Silhouette translucide et vaporeuse, contours flous qui se dissolvent et se reforment. Corps sans forme fixe, teintes cyan et violet en fusion, laisse une traînée de pixels éphémères dans son sillage.",
+          "action_id": "swap_positions",
+          "action_params": {}
+        },
+        {
+          "niveau": 2,
+          "nom": "Miroir Brisé",
+          "stats": {
+            "ATK": 5,
+            "DEF": 7,
+            "HP": 11
+          },
+          "role": "Illusion, Confusion",
+          "action_speciale": "Reflet Trompeur (2 MOVE) : L'ennemi ciblé à Portée 2 a 50% de chance d'attaquer l'unité adjacente la plus proche (allié ou ennemi).",
+          "design_visuel": "Fragment de verre brisé en forme de triangle irrégulier, flottant en rotation lente. Surface pixelisée reflétant une image déformée et glitchée, contours néon cyan qui saignent.",
+          "action_id": "confusion_redirect",
+          "action_params": {
+            "range": 2,
+            "chance": 0.5,
+            "target": "enemy",
+            "redirect_to": "nearest_adjacent_unit"
+          },
+          "action_tags": [
+            "chance",
+            "control",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Symbole de Bug",
+          "stats": {
+            "ATK": 10,
+            "DEF": 4,
+            "HP": 10
+          },
+          "role": "Bruiser de confusion / Inversion de cible.",
+          "action_speciale": "Redirection Mentale (3 ATK) : L'ennemi ciblé doit cibler un allié adjacent (s'il y en a) pour sa prochaine attaque.",
+          "design_visuel": "Forme humanoïde déformée dont un membre est anormalement long ou dont les pixels glitchent.",
+          "action_id": "redirect_next_attack_to_adjacent_ally",
+          "action_params": {
+            "duration": "next_attack"
+          },
+          "action_tags": [
+            "redirect"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Fragment Désaxé",
+          "stats": {
+            "ATK": 7,
+            "DEF": 6,
+            "HP": 9
+          },
+          "role": "Micro-glitch de position.",
+          "action_speciale": "Glissement Aléatoire (Coût 2 MOVE) : lorsqu’il inflige des dégâts à une unité avec son attaque, tu peux déplacer cette unité d’1 case dans l’une de deux directions adjacentes prédéfinies (par exemple gauche ou droite de la direction d’attaque).",
+          "design_visuel": "Petit amas de polygones flottants, décalés en plusieurs couches. L’ennemi frappé semble se dédoubler un instant avant de se retrouver décalé d’une case.",
+          "action_id": "direct_damage",
+          "action_params": {},
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 2,
+          "nom": "Pixel Errant",
+          "stats": {
+            "ATK": 6,
+            "DEF": 6,
+            "HP": 9
+          },
+          "role": "Nuisance mobile.",
+          "action_speciale": "Traversée Buguée (passif) : peut traverser les unités lorsqu’il se déplace. La première unité qu’il traverse ce tour subit 1 dégât direct si elle utilise une action spéciale à son prochain tour.",
+          "design_visuel": "Petit carré lumineux flottant, laissant derrière lui une traînée de pixels qui s’accrochent brièvement aux unités traversées, comme un artefact graphique.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "damage_values": [
+              1
+            ],
+            "damage": 1,
+            "apply_status": [
+              {
+                "status": "PHASE"
+              }
+            ],
+            "note": "Traversée Buguée (passif) : peut traverser les unités lorsqu’il se déplace. La première unité qu’il traverse ce tour subit 1 dégât direct si elle utilise une action spéciale à son prochain tour."
+          },
+          "action_tags": [
+            "control",
+            "damage"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Illusion Spectrale",
+          "stats": {
+            "ATK": 7,
+            "DEF": 5,
+            "HP": 8
+          },
+          "role": "Miroir / Changement de cible.",
+          "action_speciale": "Double Trompeur (2 MOVE + 1 TRAP) : Crée un jeton 'Leurre' qui attire l'attention de l'ennemi.",
+          "design_visuel": "Copie semi-transparente glitchée d’une silhouette humanoïde, contours cyan qui tremblent. Le visage est absent, remplacé par un motif de pixels brisés, les membres se décalent par intermittence.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Double Trompeur (2 MOVE + 1 TRAP) : Crée un jeton 'Leurre' qui attire l'attention de l'ennemi."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Miroir Glitché",
+          "stats": {
+            "ATK": 7,
+            "DEF": 5,
+            "HP": 9
+          },
+          "role": "Débuff / Inversion de stats.",
+          "action_speciale": "Inversion de Champ (2 DEF) : Échange les valeurs de base ATK et DEF d'un monstre allié ou ennemi adjacent jusqu'à ton prochain tour.",
+          "design_visuel": "Grand panneau de verre brisé et flottant reflétant un ennemi avec ses stats inversées.",
+          "action_id": "swap_positions",
+          "action_params": {}
+        },
+        {
+          "niveau": 3,
+          "nom": "Transmutateur",
+          "stats": {
+            "ATK": 8,
+            "DEF": 6,
+            "HP": 11
+          },
+          "role": "Inversion de stats personnelle.",
+          "action_speciale": "Transmutation (3 ATK) : Inverse ses propres valeurs de base ATK et DEF pour l'attaque en cours.",
+          "design_visuel": "Créature faite d'énergies brutes et de couleurs vives.",
+          "action_id": "swap_atk_def_for_attack",
+          "action_params": {
+            "duration": "this_attack"
+          }
+        },
+        {
+          "niveau": 3,
+          "nom": "Inverseur Mineur",
+          "stats": {
+            "ATK": 7,
+            "DEF": 7,
+            "HP": 11
+          },
+          "role": "Inversion locale des stats.",
+          "action_speciale": "Inversion de Matrice (Coût 3 MOVE) : échange les valeurs ATK et DEF de base d’une unité (alliée ou ennemie) à portée 2 jusqu’à ton prochain tour.",
+          "design_visuel": "Créature fractale composée de deux moitiés opposées (une lumineuse, une sombre). Ses mains tournent une sorte de cube de données qui se retourne lorsqu’elle altère les stats de la cible.",
+          "action_id": "swap_positions",
+          "action_params": {
+            "range": 2
+          },
+          "action_tags": [
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 3,
+          "nom": "Disloqueur de Cible",
+          "stats": {
+            "ATK": 7,
+            "DEF": 6,
+            "HP": 12
+          },
+          "role": "Contrôle bizarre de ciblage.",
+          "action_speciale": "Redirection Chaotique (Coût 3 MOVE) : choisit un ennemi à portée 2. Lors de sa prochaine attaque, cet ennemi doit cibler l’unité adjacente la moins blessée (alliée ou ennemie) au lieu de sa cible initiale, si possible.",
+          "design_visuel": "Silhouette abstraite entourée de flèches et de lignes de visée tordues. Les trajectoires d’attaque des ennemis sont représentées comme des rayons qui se courbent autour de lui.",
+          "action_id": "random_retarget",
+          "action_params": {
+            "range": 2,
+            "scope": "unit",
+            "duration": "next_action"
+          },
+          "action_tags": [
+            "ranged",
+            "redirect"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Faucheur de Trames",
+          "stats": {
+            "ATK": 10,
+            "DEF": 7,
+            "HP": 15
+          },
+          "role": "Damage dealer étrange / anti-buff.",
+          "action_speciale": "Frappe Désalignée (Coût 3 ATK) : inflige des dégâts moyens à une cible à portée 2. Si la cible possède au moins un buff actif (ATK, DEF ou MOVE temporaire), Frappe Désalignée ignore 2 points de DEF. Rupture de Trame (passif) : la première fois par tour qu’un ennemi à portée 2 reçoit un buff, il subit 1 dégât direct.",
+          "design_visuel": "Figure longiligne couverte de lignes de code craquelées, brandissant une faux faite de fragments de données. Lorsqu’elle frappe, les auras de buff autour de la cible se fragmentent en éclats.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "range": 2,
+            "damage_values": [
+              1
+            ],
+            "damage": 1,
+            "note": "Frappe Désalignée (Coût 3 ATK) : inflige des dégâts moyens à une cible à portée 2. Si la cible possède au moins un buff actif (ATK, DEF ou MOVE temporaire), Frappe Désalignée ignore 2 points de DEF. Rupture de Trame (passif) : la première fois par tour qu’un ennemi à portée 2 reçoit un buff, il subit 1 dégât direct."
+          },
+          "action_tags": [
+            "damage",
+            "ranged"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Cicatrice Dimensionnelle",
+          "stats": {
+            "ATK": 9,
+            "DEF": 7,
+            "HP": 14
+          },
+          "role": "Dégâts sur glitch / Contrôle.",
+          "action_speciale": "Fissure Réelle (3 MOVE + 1 ATK) : L'ennemi ciblé subit 2 dégâts directs chaque fois qu'il utilise une capacité spéciale pour son prochain tour.",
+          "design_visuel": "Faille verticale déchirure dans l’espace, bords irréguliers qui saignent des pixels noirs et cyan. De l’intérieur émerge une lumière chaotique, comme si deux dimensions se superposaient.",
+          "action_id": "direct_damage",
+          "action_params": {
+            "damage_values": [
+              2
+            ],
+            "damage": 2
+          },
+          "action_tags": [
+            "damage"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Déflecteur de Flux",
+          "stats": {
+            "ATK": 7,
+            "DEF": 8,
+            "HP": 13
+          },
+          "role": "Redirection d'attaque.",
+          "action_speciale": "Rétroaction (4 DEF) : Si le Déflecteur est attaqué, l'attaque est annulée et redirigée vers l'unité ennemie la plus proche.",
+          "design_visuel": "Structure géométrique octogonale flottante, plaques translucides se chevauchant en rotation lente. Des éclairs néon jaune-magenta craquent entre les plaques lorsqu’une attaque est absorbée.",
+          "action_id": "counter_redirect",
+          "action_params": {
+            "trigger": "on_attacked",
+            "effect": "cancel_and_redirect"
+          },
+          "action_tags": [
+            "redirect"
+          ]
+        },
+        {
+          "niveau": 4,
+          "nom": "Pont Onirique",
+          "stats": {
+            "ATK": 8,
+            "DEF": 6,
+            "HP": 10
+          },
+          "role": "Utilité / Placement temporaire.",
+          "action_speciale": "Passage Temporaire (3 MOVE) : Crée une tuile neutre 'Pont Onirique' qui disparaît au début du prochain tour.",
+          "design_visuel": "Entité se manifestant comme un fragment de chemin flottant dans le vide.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Passage Temporaire (3 MOVE) : Crée une tuile neutre 'Pont Onirique' qui disparaît au début du prochain tour."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Entité du Néant",
+          "stats": {
+            "ATK": 12,
+            "DEF": 8,
+            "HP": 16
+          },
+          "role": "Ignore les règles de déplacement ou d'attaque.",
+          "action_speciale": "Changement de Phase (5 MOVE) : Se téléporte sur n'importe quelle case vide. Frappe Inexorable (4 ATK) : ignore les bonus DEF temporaires.",
+          "design_visuel": "Entité humanoïde noire et blanche faite d'ombres mouvantes et de vides spatiaux.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "note": "Changement de Phase (5 MOVE) : Se téléporte sur n'importe quelle case vide. Frappe Inexorable (4 ATK) : ignore les bonus DEF temporaires."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Cœur de Glitch",
+          "stats": {
+            "ATK": 9,
+            "DEF": 8,
+            "HP": 19
+          },
+          "role": "Altération locale des règles.",
+          "action_speciale": "Inversion de Matrice (Coût 3 MOVE) : dans une zone de 3×3 centrée sur le Cœur, échange les valeurs de base ATK et DEF de toutes les unités jusqu’à ton prochain tour. Zone Désynchronisée (passif) : les ennemis dans cette zone voient la portée de leurs attaques réduite de 1 (minimum 1).",
+          "design_visuel": "Noyau flottant composé de cubes et de polygones déstructurés, aux textures bugguées. Le sol autour de lui se pixelise et se déforme, comme si la réalité se mettait en erreur.",
+          "action_id": "passive_effect",
+          "action_params": {
+            "note": "Inversion de Matrice (Coût 3 MOVE) : dans une zone de 3×3 centrée sur le Cœur, échange les valeurs de base ATK et DEF de toutes les unités jusqu’à ton prochain tour. Zone Désynchronisée (passif) : les ennemis dans cette zone voient la portée de leurs attaques réduite de 1 (minimum 1)."
+          },
+          "action_tags": [
+            "terrain_like"
+          ]
+        },
+        {
+          "niveau": 5,
+          "nom": "Entité Hors‑Cadre",
+          "stats": {
+            "ATK": 11,
+            "DEF": 7,
+            "HP": 18
+          },
+          "role": "Finisseur positionnel étrange.",
+          "action_speciale": "Frappe Hors‑Champ (Coût 4 ATK) : peut cibler un ennemi n’importe où sur le plateau, mais seulement si l’Entité se trouve sur une case de bord. La frappe ignore les bonus temporaires (buffs) de la cible. Distorsion Persistante : si Frappe Hors‑Champ détruit une unité, la case de la cible devient une tuile \"Bug\" qui inflige 1 dégât direct à toute unité qui y termine son tour.",
+          "design_visuel": "Silhouette vaguement humanoïde dont une partie dépasse littéralement des limites du plateau, comme si elle venait d’un écran voisin. Des lignes de glitch et des fragments de cadre brisé apparaissent là où elle frappe.",
+          "action_id": "terrain_like_effect",
+          "action_params": {
+            "damage_values": [
+              1
+            ],
+            "damage": 1,
+            "note": "Frappe Hors‑Champ (Coût 4 ATK) : peut cibler un ennemi n’importe où sur le plateau, mais seulement si l’Entité se trouve sur une case de bord. La frappe ignore les bonus temporaires (buffs) de la cible. Distorsion Persistante : si Frappe Hors‑Champ détruit une unité, la case de la cible devient une tuile \"Bug\" qui inflige 1 dégât direct à toute unité qui y termine son tour."
+          },
+          "action_tags": [
+            "damage",
+            "terrain_like"
+          ]
+        }
+      ]
+    }
+  ]
+}

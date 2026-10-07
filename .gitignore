@@ -1,0 +1,74 @@
+# venv
+.venv/
+venv/
+env/
+
+# caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# local data
+logs/
+docs/CODEMAP.json
+docs/CODEMAP.md
+docs/CODEMAP.txt
+docs/CODEMAP.docx
+
+# Reports : on exclut les data brutes mais on garde les .md de synthèse
+reports/bracket/*/matrix.jsonl
+reports/bracket/*/bracket.jsonl
+reports/bracket/*.jsonl
+reports/bracket/_smoke*/
+reports/bracket/smoke*/
+
+# RL checkpoints (gros binaires, regenerables via training)
+rl/checkpoints/
+
+# Engine snapshots (temporaire, généré pendant les games)
+engine/snapshots/turn_*.json
+engine/snapshots/latest.json
+engine/snapshots/command.json
+engine/snapshots/renderer_quit.json
+
+# Stats persistants (regenerables)
+data/faction_stats.json
+data/faction_stats.json.bak*
+data/*_prefs.json
+data/*_prefs.json.bak*
+
+# Backup auto / temp
+*.bak
+*.tmp
+~*
+
+# Claude Code config locale
+.claude/
+
+# Backup engine pré-migration (déjà archivé, gros)
+engine/_pre_migration_backup/
+
+# Archives / vieux fichiers
+_archive/
+!pygame/_archive/
+*.bak_v0
+data/OLD JSON/
+zenom_frozen.zip
+
+# Snapshots runtime (état moteur, générés à l'exécution)
+engine/snapshots/
+
+# Rapports de run (données locales, pas du source)
+reports/
+
+# Assets sprites (228 MB PNG — trop lourd pour GitHub, utiliser Git LFS si besoin)
+assets/
+
+# Fichiers texte bruts
+*.txt
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
